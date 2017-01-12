@@ -14,7 +14,7 @@ class RawData(models.Model):
 	timestamp = models.DateTimeField('date logged', default = now)
 
 	def check_values(record):
-		if (record.flow >= 0 and record.discharge_pressure >= 0 and record.critical_pressure >=0):
+		if (record.winddir >= 0):
 			return True
 		else:
 			return False

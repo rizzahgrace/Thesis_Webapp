@@ -1,0 +1,52 @@
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Data from CSV</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'hmain/record.css' %}" />
+        <link rel='stylesheet' href='/hmain/record.css' type='text/css' media='screen'>
+    </head>
+    <body>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-3 col-lg-offset-5 centered">
+                <h1>Data from CSV</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            {% if messages %}
+            <ul class="messages">
+                {% for msg in messages %}       
+                <li>
+                    <div class="alert alert-{{msg.level_tag}}" role="alert">
+                {{msg.message}}
+                </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <div class="content container">
+            <div class="row">
+                <div class = "col-lg-3 col-lg-offset-5 centered" >
+                    <form enctype="multipart/form-data" method="POST" action="">
+                        {% csrf_token %}
+                        <div class="btn-seperator">
+                            <div>{{ form }}</div>
+                            <button type="submit" class="save btn btn-default" name="action" value="add_csv">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+</html>
