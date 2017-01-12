@@ -1,1 +1,4 @@
 .vagrant/machine/*
+thesis/webapp/__pycache__/*
+thesis/webapp/migrations/__pycache__/*
+thesis/webapp/static/*
