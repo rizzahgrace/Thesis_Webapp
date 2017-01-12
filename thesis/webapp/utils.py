@@ -1,8 +1,9 @@
 #all the commands were run in the python
+import datetime
 from django.contrib import messages
 from .models import RawData
 import csv
-import datetime
+
 
 def handle_upload_file(f):
 	dataReader=csv.reader(f.read().decode().splitlines(), delimiter=',', quotechar='"')
@@ -40,5 +41,5 @@ def handle_upload_file(f):
 			datacsv.pressure = float(row[7])
 		except(ValueError):
 			datacsv.pressure = None
-		datacsv.timestamp=datetime.datetime.strptime(row[8], '%d/%m/%Y %H:%M\t')
+		datacsv.timestamp=datetime.datetime.strptime(row[8], '%m/%d/%Y %H:%M')
 		datacsv.save()
