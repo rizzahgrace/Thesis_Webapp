@@ -7,7 +7,7 @@ from django.contrib import messages
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello, world. You're at the webapp index.")
+    return render(request, 'webapp/home.html')
 
 def csv(request):
 	if request.method == 'POST':
