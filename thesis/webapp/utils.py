@@ -46,9 +46,9 @@ def handle_upload_file(f):
 
 class ChartData(object):    
 	def raw_data():
+		rawdata = RawData.objects.all()
 		data = {'timestamp': [], 'tempf': [],
 				 'windspeedmph': [], 'rainin': []}
-		rawdata = RawData.objects.all()
 		for unit in rawdata:
 			data['timestamp'].append(unit.timestamp)
 			data['tempf'].append(unit.tempf)

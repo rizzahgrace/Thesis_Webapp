@@ -27,16 +27,19 @@ def csv(request):
 
 	return render(request, 'webapp/csv.html', {'form': form})
 
+# class JSONResponse(HttpResponse):
+# 	"""
+# 	An HttpResponse that renders its content into JSON.
+# 	"""
+# 	def __init__(self, data, **kwargs):
+# 		content = JSONRenderer().render(data)
+# 		kwargs['content_type'] = 'application/json'
+# 		super(JSONResponse, self).__init__(content, **kwargs)
 
-
-class JSONResponse(HttpResponse):
-	"""
-	An HttpResponse that renders its content into JSON.
-	"""
-	def __init__(self, data, **kwargs):
-		content = JSONRenderer().render(data)
-		kwargs['content_type'] = 'application/json'
-		super(JSONResponse, self).__init__(content, **kwargs)
+class DataListView(APIView):
+    def get(self, request):
+        data = RawData.objects.values('windspeedmph')
+        return Response(data)
 
 @csrf_exempt
 def rawdatalist(request):
@@ -51,7 +54,7 @@ def rawdatalist(request):
 def plot(request, chartID = 'rawdatachart', chart_type = 'line', chart_height = 500):
 	data = ChartData.raw_data()
 	chart = {"renderTo": chartID, "type": chart_type, "height": chart_height,}  
-	title = {"text": 'Raw Data'}
+	title = "{text: 'Raw Data'}"
 	xAxis = {"title": {"text": 'Timestamp'}, "categories": data['timestamp']}
 	yAxis = {"title": {"text": 'Data'}}
 	series = [
@@ -59,6 +62,4 @@ def plot(request, chartID = 'rawdatachart', chart_type = 'line', chart_height = 
 		{"name": 'Wind Speed', "data": data['windspeedmph']},
 		{"name": 'Rain', "data": data['rainin']}
 		]
-	return render(request, 'webapp/highchart_script.html', {'chartID': chartID, 'chart': chart,
-													'series': series, 'title': title, 
-													'xAxis': xAxis, 'yAxis': yAxis})
+	return render(request, 'webapp/highchart_script.html', {'chartID': chartID, 'chart': chart,'title': title,'xAxis': xAxis, 'yAxis': yAxis, 'series':series})

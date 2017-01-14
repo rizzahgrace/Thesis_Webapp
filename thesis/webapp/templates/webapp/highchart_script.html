@@ -2,6 +2,7 @@
 <html>
   <head>
     <title> AMPS </title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -9,25 +10,29 @@
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script type="text/javascript">
-    var chart_id = {{ chartID|safe }}
-    var chart = {{ chart|safe }}
-    var title = {{ title|safe }}
-    var xAxis = {{ xAxis|safe }}
-    var yAxis = {{ yAxis|safe }}
-    var series = {{ series|safe }}
+    var chart;
+    jQuery(document).ready(function() {
+    chart = new Highcharts.Chart({
+    chart: {
+      renderTo: 'chart_container',
+      defaultSeriesType: 'line',
+      marginRight: 130,
+      marginBottom: 30
+    },
+    title: {{title}},
+    xAxis: {{ xAxis|safe }},
+    yAxis: {{ yAxis|safe }},
+    series: {{ series|safe}}
+});
 	</script>
-    <meta charset="utf-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
-          <h2>Real-time Data</h2>
-          <a href="#" role="button" class="btn btn-default">View details »</a>
-        </div>
         <div class="col-md-8">
-          <div id={{ chartID|safe }} class="chart" style="height:100px; width:100%"></div>
+          	<div id="chart_container" style="height: 400px"></div>
         </div>
       </div>
     </div>
