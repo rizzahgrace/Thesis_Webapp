@@ -43,3 +43,15 @@ def handle_upload_file(f):
 			datacsv.pressure = None
 		datacsv.timestamp=datetime.datetime.strptime(row[8], '%m/%d/%Y %H:%M')
 		datacsv.save()
+
+class ChartData(object):    
+	def raw_data():
+		data = {'timestamp': [], 'tempf': [],
+				 'windspeedmph': [], 'rainin': []}
+		rawdata = RawData.objects.all()
+		for unit in rawdata:
+			data['timestamp'].append(unit.timestamp)
+			data['tempf'].append(unit.tempf)
+			data['windspeedmph'].append(unit.windspeedmph)
+			data['rainin'].append(unit.rainin)
+		return data

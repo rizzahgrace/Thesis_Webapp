@@ -10,9 +10,9 @@
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script type="text/javascript">
-var chart;
-jQuery(document).ready(function() {
-  chart = new Highcharts.Chart({
+    var chart;
+    jQuery(document).ready(function() {
+    chart = new Highcharts.Chart({
     chart: {
       renderTo: 'chart_container',
       defaultSeriesType: 'line',
@@ -20,15 +20,14 @@ jQuery(document).ready(function() {
       marginBottom: 30
     },
     title: {
-      text: 'Enrollment by Semester ',
-      x: -20 //center
+      text: 'Weather Readings ',
+      x: -20
     },
     subtitle: {
       text: '',
       x: -20
     },
     xAxis: {
-      // categories: [ '{{ categories|join:"','" }}']
       categories: ['Fall 2008', 'Spring 2009','Fall 2009', 'Spring 2010', 'Fall 2010', 'Spring 2011']
     },
     yAxis: {
@@ -55,21 +54,14 @@ jQuery(document).ready(function() {
       borderWidth: 0
     },
     series: [{
-      name: 'Total Enrolled',
+      name: 'Temperature',
       data: [1, 27, 34, 39, 46, 56]
-      // data: [{{ total_enrolled|join:"," }}]
     }, {
-      name: 'Undergrads',
-            // data: [{{ undergrad|join:"," }}]
+      name: 'Rain in',
       data: [18, 22, 30, 34, 40, 47]
     }, {
-      name: 'Grads',
-      // data: [{{ grad|join:"," }}]
+      name: 'Windspeed (kph)',
       data: [1, 2, 4, 4, 5, 7]
-    }, {
-      name: 'Employees',
-      // data: [{{ employee|join:"," }}]
-      data: [2, 3, 0, 1, 1, 2]
     }]
   });
 

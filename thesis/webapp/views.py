@@ -2,12 +2,13 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .models import RawData
 from webapp.forms import UploadCSVFile
-from webapp.utils import handle_upload_file
+from webapp.utils import handle_upload_file, ChartData
 from django.contrib import messages
 
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
 from webapp.serializers import DataSerializer
 
 # Create your views here.
@@ -26,13 +27,38 @@ def csv(request):
 
 	return render(request, 'webapp/csv.html', {'form': form})
 
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        'rawdata': reverse('webapp:rawdata', request=request, format=format),
-    })
-class RawDataView(APIView):
-    def get(self, request, format=None):
-    	rawdata=RawData.objects.all()
-    	serializer = DataSerializer(rawdata, many=True)
-    	return Response(serializer.data)
+
+
+class JSONResponse(HttpResponse):
+	"""
+	An HttpResponse that renders its content into JSON.
+	"""
+	def __init__(self, data, **kwargs):
+		content = JSONRenderer().render(data)
+		kwargs['content_type'] = 'application/json'
+		super(JSONResponse, self).__init__(content, **kwargs)
+
+@csrf_exempt
+def rawdatalist(request):
+	"""
+	List all code snippets, or create a new snippet.
+	"""
+	if request.method == 'GET':
+		rawdata = RawData.objects.all()
+		serializer = DataSerializer(rawdata, many=True)
+		return JSONResponse(serializer.data)
+
+def plot(request, chartID = 'rawdatachart', chart_type = 'line', chart_height = 500):
+	data = ChartData.raw_data()
+	chart = {"renderTo": chartID, "type": chart_type, "height": chart_height,}  
+	title = {"text": 'Raw Data'}
+	xAxis = {"title": {"text": 'Timestamp'}, "categories": data['timestamp']}
+	yAxis = {"title": {"text": 'Data'}}
+	series = [
+		{"name": 'Temperature (F)', "data": data['tempf']}, 
+		{"name": 'Wind Speed', "data": data['windspeedmph']},
+		{"name": 'Rain', "data": data['rainin']}
+		]
+	return render(request, 'webapp/highchart_script.html', {'chartID': chartID, 'chart': chart,
+													'series': series, 'title': title, 
+													'xAxis': xAxis, 'yAxis': yAxis})
