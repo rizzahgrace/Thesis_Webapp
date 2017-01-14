@@ -4,7 +4,11 @@ from .models import RawData
 from webapp.forms import UploadCSVFile
 from webapp.utils import handle_upload_file
 from django.contrib import messages
-from highcharts.views import HighChartsBarView
+
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from webapp.serializers import DataSerializer
 
 # Create your views here.
 def index(request):
@@ -22,15 +26,13 @@ def csv(request):
 
 	return render(request, 'webapp/csv.html', {'form': form})
 
-class BarView(HighChartsBarView):
-	categories = ['Orange', 'Bananas', 'Apples']
-
-	@property
-	def series(self):
-		result = []
-		for name in ('Joe', 'Jack', 'William', 'Averell'):
-			data = []
-			for x in range(len(self.categories)):
-				data.append(random.randint(0, 10))
-			result.append({'name': name, "data": data})
-		return result
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'rawdata': reverse('webapp:rawdata', request=request, format=format),
+    })
+class RawDataView(APIView):
+    def get(self, request, format=None):
+    	rawdata=RawData.objects.all()
+    	serializer = DataSerializer(rawdata, many=True)
+    	return Response(serializer.data)

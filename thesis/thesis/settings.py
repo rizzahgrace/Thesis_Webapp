@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['192.168.33.10', 'localhost', '127.0.0.1']
 INSTALLED_APPS = [
     'webapp.apps.WebappConfig',
     'highcharts',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'thesis.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
