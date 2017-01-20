@@ -38,7 +38,7 @@ def csv(request):
 
 class DataListView(APIView):
     def get(self, request):
-        data = RawData.objects.values('windspeedmph')
+        data = RawData.objects.values('winddir')
         return Response(data)
 
 @csrf_exempt
@@ -53,8 +53,7 @@ def rawdatalist(request):
 
 def plot(request, chartID = 'rawdatachart', chart_type = 'line', chart_height = 500):
 	data = ChartData.raw_data()
-	chart = {"renderTo": chartID, "type": chart_type, "height": chart_height,}  
-	title = "{text: 'Raw Data'}"
+	title = "{text:'Raw Data'}"
 	xAxis = {"title": {"text": 'Timestamp'}, "categories": data['timestamp']}
 	yAxis = {"title": {"text": 'Data'}}
 	series = [
@@ -62,4 +61,4 @@ def plot(request, chartID = 'rawdatachart', chart_type = 'line', chart_height = 
 		{"name": 'Wind Speed', "data": data['windspeedmph']},
 		{"name": 'Rain', "data": data['rainin']}
 		]
-	return render(request, 'webapp/highchart_script.html', {'chartID': chartID, 'chart': chart,'title': title,'xAxis': xAxis, 'yAxis': yAxis, 'series':series})
+	return render(request, 'webapp/highchart_script.html', {'chartID': chartID, 'title': title,'xAxis': xAxis, 'yAxis': yAxis, 'series':series})

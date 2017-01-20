@@ -4,89 +4,166 @@
     <title> AMPS </title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{% static 'webapp/jumbotron.css' %}">
+    <link rel="stylesheet" href="{% static 'webapp/small-business.css' %}">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script type="text/javascript">
-    var chart;
-    jQuery(document).ready(function() {
-    chart = new Highcharts.Chart({
-    chart: {
-      renderTo: 'chart_container',
-      defaultSeriesType: 'line',
-      marginRight: 130,
-      marginBottom: 30
-    },
-    title: {
-      text: 'Weather Readings ',
-      x: -20
-    },
-    subtitle: {
-      text: '',
-      x: -20
-    },
-    xAxis: {
-      categories: ['Fall 2008', 'Spring 2009','Fall 2009', 'Spring 2010', 'Fall 2010', 'Spring 2011']
-    },
-    yAxis: {
-      title: {
-        text: 'Number of Students'
-      },
-      plotLines: [{
-        value: 0,
-        width: 1,
-        color: '#808080'
-      }]
-    },
-    tooltip: {
-      formatter: function() {
-                  return ''+ this.series.name +''+this.x +': '+ this.y;
-      }
-    },
-    legend: {
-      layout: 'vertical',
-      align: 'right',
-      verticalAlign: 'top',
-      x: -10,
-      y: 100,
-      borderWidth: 0
-    },
-    series: [{
-      name: 'Temperature',
-      data: [1, 27, 34, 39, 46, 56]
-    }, {
-      name: 'Rain in',
-      data: [18, 22, 30, 34, 40, 47]
-    }, {
-      name: 'Windspeed (kph)',
-      data: [1, 2, 4, 4, 5, 7]
-    }]
-  });
+//     var chart;
+//     jQuery(document).ready(function() {
+//     chart = new Highcharts.Chart({
+//     chart: {
+//       renderTo: 'chart_container',
+//       defaultSeriesType: 'line',
+//       marginRight: 130,
+//       marginBottom: 30
+//     },
+//     title: {
+//       text: 'Weather Readings ',
+//       x: -20
+//     },
+//     subtitle: {
+//       text: '',
+//       x: -20
+//     },
+//     xAxis: {
+//       categories: ['Fall 2008', 'Spring 2009','Fall 2009', 'Spring 2010', 'Fall 2010', 'Spring 2011']
+//     },
+//     yAxis: {
+//       title: {
+//         text: 'Number of Students'
+//       },
+//       plotLines: [{
+//         value: 0,
+//         width: 1,
+//         color: '#808080'
+//       }]
+//     },
+//     tooltip: {
+//       formatter: function() {
+//                   return ''+ this.series.name +''+this.x +': '+ this.y;
+//       }
+//     },
+//     legend: {
+//       layout: 'vertical',
+//       align: 'right',
+//       verticalAlign: 'top',
+//       x: -10,
+//       y: 100,
+//       borderWidth: 0
+//     },
+//     series: [{
+//       name: 'Temperature',
+//       data: [1, 27, 34, 39, 46, 56]
+//     }, {
+//       name: 'Rain in',
+//       data: [18, 22, 30, 34, 40, 47]
+//     }, {
+//       name: 'Windspeed (kph)',
+//       data: [1, 2, 4, 4, 5, 7]
+//     }]
+//   });
 
-});
+// });
+$(function () {
+                var processed_json = new Array();   
+                $.getJSON('http://192.168.33.10/webapp/rawdata/?format=json', function(data) {
+                    // Populate series
+                    for (i = 0; i < data.length; i++){
+                        processed_json.push([data[i].key, data[i].value]);
+                    }
+                 
+                    // draw chart
+                    $('#chart_container').highcharts({
+                    chart: {
+                        type: "line"
+                    },
+                    title: {
+                        text: "Student data"
+                    },
+                    xAxis: {
+                        type: 'category',
+                        allowDecimals: false,
+                        title: {
+                            text: ""
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: "Scores"
+                        }
+                    },
+                    series: [{
+                      name: 'Subjects',
+                        data: processed_json
+                    }]
+                }); 
+            });
+        });
 </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container"></div>
-      <div class="navbar-header">
-        <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#" class="navbar-brand">AMPS</a>
-      </div>
+     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="http://placehold.it/150x50&text=Logo" alt="">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
     </nav>
-    <div class="jumbotron">
-      <div class="container">
-        <center>
-          <h1>Weather Station - Faura Hall</h1>
-          <p>Introduction stuff. </p>
-          <p><a href="#" role="button" class="btn btn-primary btn-lg">Learn more »</a></p>
-        </center>
-      </div>
-    </div>
     <div class="container">
+        <!-- Heading Row -->
+        <div class="row">
+            <div class="col-md-8">
+                <div id="chart_container" style="height: 400px"></div>
+            </div>
+            <!-- /.col-md-8 -->
+            <div class="col-md-4">
+                <h1><i>Weather Now</i></h1>
+                <p>This website aims to provide the current weather data provided by the weather station installed in the Faura Hall rooftop. This will provide data such as rainfall, wind speed, wind direction, humidity, and temperature.</p>
+            
+                <a class="btn btn-primary btn-lg" href="#">More Information</a>
+            </div>
+            <!-- /.col-md-4 -->
+        </div>
+
+        <hr>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="well text-center">
+                    This is a well that is a great spot for a business tagline or phone number for easy access!
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
       <div class="row">
         <div class="col-md-4">
           <h2>Real-time Data</h2>

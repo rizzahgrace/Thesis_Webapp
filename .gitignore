@@ -2,3 +2,5 @@
 thesis/webapp/__pycache__/*
 thesis/webapp/migrations/__pycache__/*
 thesis/webapp/static/*
+gm/*
+_MACOSX/*
