@@ -32,7 +32,7 @@
 //     },
 //     yAxis: {
 //       title: {
-//         text: 'Number of Students'
+//         text: ''
 //       },
 //       plotLines: [{
 //         value: 0,
@@ -67,13 +67,13 @@
 
 // });
 $(function () {
-                var processed_json = new Array();   
-                $.getJSON('http://192.168.33.10/webapp/rawdata/?format=json', function(data) {
+                var processed_json = [];
+                var jsonurl = "http://192.168.33.10/webapp/rawdatalist"  
+                $.getJSON(jsonurl, function(data) {
                     // Populate series
                     for (i = 0; i < data.length; i++){
-                        processed_json.push([data[i].key, data[i].value]);
+                        processed_json.push({name:data[i].key, data:data[i].value});
                     }
-                 
                     // draw chart
                     $('#chart_container').highcharts({
                     chart: {
@@ -83,10 +83,9 @@ $(function () {
                         text: "Student data"
                     },
                     xAxis: {
-                        type: 'category',
-                        allowDecimals: false,
+                        type:"category"
                         title: {
-                            text: ""
+                            text: "Timestamp"
                         }
                     },
                     yAxis: {
@@ -94,10 +93,7 @@ $(function () {
                             text: "Scores"
                         }
                     },
-                    series: [{
-                      name: 'Subjects',
-                        data: processed_json
-                    }]
+                    series: []
                 }); 
             });
         });

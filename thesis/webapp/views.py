@@ -27,29 +27,27 @@ def csv(request):
 
 	return render(request, 'webapp/csv.html', {'form': form})
 
-# class JSONResponse(HttpResponse):
-# 	"""
-# 	An HttpResponse that renders its content into JSON.
-# 	"""
-# 	def __init__(self, data, **kwargs):
-# 		content = JSONRenderer().render(data)
-# 		kwargs['content_type'] = 'application/json'
-# 		super(JSONResponse, self).__init__(content, **kwargs)
-
 class DataListView(APIView):
-    def get(self, request):
-        data = RawData.objects.values('winddir')
-        return Response(data)
+	def get(self, request):
+		data = RawData.objects.values('winddir')
+		return Response(data)
+
+class JSONResponse(HttpResponse):
+	"""
+	An HttpResponse that renders its content into JSON.
+	"""
+	def __init__(self, data, **kwargs):
+		content = JSONRenderer().render(data)
+		kwargs['content_type'] = 'application/json'
+		super(JSONResponse, self).__init__(content, **kwargs)
 
 @csrf_exempt
 def rawdatalist(request):
-	"""
-	List all code snippets, or create a new snippet.
-	"""
 	if request.method == 'GET':
 		rawdata = RawData.objects.all()
 		serializer = DataSerializer(rawdata, many=True)
 		return JSONResponse(serializer.data)
+
 
 def plot(request, chartID = 'rawdatachart', chart_type = 'line', chart_height = 500):
 	data = ChartData.raw_data()

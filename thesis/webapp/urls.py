@@ -9,6 +9,7 @@ app_name = 'webapp'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^csv', views.csv, name='csv'),
+    url(r'^rawdatalist', views.rawdatalist, name='rawdatalist'),
     url(r'^rawdata', views.DataListView.as_view(), name='rawdata'),
     url(r'^chart', views.plot, name='chart'),
 ]
