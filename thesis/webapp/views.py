@@ -4,6 +4,7 @@ from .models import RawData
 from webapp.forms import UploadCSVFile
 from webapp.utils import handle_upload_file, ChartData
 from django.contrib import messages
+from chartit import DataPool, Chart
 
 from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
@@ -26,6 +27,34 @@ def csv(request):
 		form = UploadCSVFile()
 
 	return render(request, 'webapp/csv.html', {'form': form})
+
+def weather_chart_view(request):
+	#Step 1: Create a DataPool with the data we want to retrieve.
+	weatherdata = DataPool(
+		series=
+			[{'options': {
+				'source': RawData.objects.all()},
+				'terms': [
+				'timestamp',
+				'winddir']}
+			])
+	cht = Chart(
+			datasource = weatherdata,
+			series_options =
+				[{'options':{
+					'type': 'line',
+					'stacking': False},
+				'terms':{
+					'timestamp': [
+					'winddir']
+				}}],
+			chart_options =
+				{'title': {
+					'text': 'Weather Data of Boston and Houston'},
+					'xAxis': {
+					'title': {
+					'text': 'Rain in'}}})
+	return render_to_response(home.html, {'weatherchart': cht})
 
 class DataListView(APIView):
 	def get(self, request):

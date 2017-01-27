@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['192.168.33.10', 'localhost', '127.0.0.1']
 INSTALLED_APPS = [
     'webapp.apps.WebappConfig',
     'highcharts',
+    'chartit',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
