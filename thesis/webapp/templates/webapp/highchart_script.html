@@ -1,42 +1,12 @@
-{% load staticfiles %}
-<html>
-  <head>
-    <title> AMPS </title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-    <script src="http://code.highcharts.com/modules/exporting.js"></script>
-    <script type="text/javascript">
-   $(function (){
-    var chart = new Highcharts.Chart({
-    chart: {
-      renderTo: 'chart_container',
-      defaultSeriesType: 'line',
-      marginRight: 130,
-      marginBottom: 30
-    },
-    title: {{title}},
-    xAxis: {{ xAxis|safe }},
-    yAxis: {{ yAxis|safe }},
-    series: {{ series|safe}}
-});
-	</script>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8">
-          	<div id="chart_container" style="height: 400px"></div>
-        </div>
-      </div>
-    </div>
-  </body>
-  <footer>
-    <p>© 2016 Company, Inc.</p>
-  </footer>
-</html>
+&lt;html&gt;
+ &lt;head&gt;
+ &lt;script type=”text/javascript” src=”/media/js/jquery-1.7.1.js”&gt;&lt;/script&gt;
+ &lt;script type=”text/javascript” src=”/media/js/Highcharts-2.1.9/js/highcharts.js”&gt;&lt;/script&gt;
+ <strong>{% load chartit %}</strong>
+ <strong>{{ weatherchart|load_charts:”container” }}</strong>
+ &lt;/head&gt;
+ &lt;body&gt;
+ &lt;div id=”container”&gt;
+ &lt;/dv&gt;
+ &lt;/body&gt;
+ &lt;/html&gt;

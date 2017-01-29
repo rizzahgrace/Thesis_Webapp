@@ -35,8 +35,8 @@ def weather_chart_view(request):
 			[{'options': {
 				'source': RawData.objects.all()},
 				'terms': [
-				'timestamp',
-				'winddir']}
+				'winddir',
+				'rainin']}
 			])
 	cht = Chart(
 			datasource = weatherdata,
@@ -45,8 +45,8 @@ def weather_chart_view(request):
 					'type': 'line',
 					'stacking': False},
 				'terms':{
-					'timestamp': [
-					'winddir']
+					'winddir': [
+					'rainin']
 				}}],
 			chart_options =
 				{'title': {
@@ -54,7 +54,7 @@ def weather_chart_view(request):
 					'xAxis': {
 					'title': {
 					'text': 'Rain in'}}})
-	return render_to_response(home.html, {'weatherchart': cht})
+	return render_to_response('webapp/home.html', {'weatherchart': cht})
 
 class DataListView(APIView):
 	def get(self, request):

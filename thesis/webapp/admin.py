@@ -7,4 +7,10 @@ class RawDataAdmin(admin.ModelAdmin):
 	list_display = ('winddir','windspeedmph','rainin','timestamp')
 	list_filter = ['timestamp']
 
+# class SampleDataAdmin(admin.ModelAdmin):
+# 	fields = ['month', 'sampledata']
+# 	list_display = ('month','sampledata')
+# 	list_filter = ['month']
+
 admin.site.register(RawData, RawDataAdmin)
+# admin.site.register(SampleData, SampleDataAdmin)
