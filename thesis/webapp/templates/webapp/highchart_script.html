@@ -1,12 +1,19 @@
-&lt;html&gt;
- &lt;head&gt;
- &lt;script type=”text/javascript” src=”/media/js/jquery-1.7.1.js”&gt;&lt;/script&gt;
- &lt;script type=”text/javascript” src=”/media/js/Highcharts-2.1.9/js/highcharts.js”&gt;&lt;/script&gt;
- <strong>{% load chartit %}</strong>
- <strong>{{ weatherchart|load_charts:”container” }}</strong>
- &lt;/head&gt;
- &lt;body&gt;
- &lt;div id=”container”&gt;
- &lt;/dv&gt;
- &lt;/body&gt;
- &lt;/html&gt;
+{% load staticfiles %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hello</title>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'js/highcharts/highcharts.js' %}"></script>
+<script type="text/javascript">
+$(function () {
+$.getJSON("{% url 'webapp:dbbar' %}", function(data) {
+$('#container').highcharts(data);
+});
+});
+</script>
+</head>
+<body>
+<div id="container" style="height: 300px"></div>
+</body>
+</html>
