@@ -12,10 +12,10 @@ from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer
 from webapp.serializers import DataSerializer
 
-from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView, HighChartsSpeedometerView, HighChartsHeatMapView, HighChartsPolarView)
+from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView, HighChartsSpeedometerView, HighChartsHeatMapView, HighChartsPolarView, HighChartsStockView)
 # Create your views here.
 def index(request):
-	return render(request, 'webapp/highchart_script.html')
+	return render(request, 'webapp/home.html')
 
 def csv(request):
 	if request.method == 'POST':
@@ -31,33 +31,6 @@ def csv(request):
 
 #for using Chartit
 #error says Nonetype object not subscriptable
-def weather_chart_view(request):
-	#Step 1: Create a DataPool with the data we want to retrieve.
-	weatherdata = DataPool(
-		series=
-			[{'options': {
-				'source': RawData.objects.all()},
-				'terms': [
-				'winddir',
-				'rainin']}
-			])
-	cht = Chart(
-			datasource = weatherdata,
-			series_options =
-				[{'options':{
-					'type': 'line',
-					'stacking': False},
-				'terms':{
-					'winddir': [
-					'rainin']
-				}}],
-			chart_options =
-				{'title': {
-					'text': 'Weather Data of Boston and Houston'},
-					'xAxis': {
-					'title': {
-					'text': 'Rain in'}}})
-	return render_to_response('webapp/home.html', {'weatherchart': cht})
 
 class DataListView(APIView):
 	def get(self, request):
@@ -79,19 +52,6 @@ def rawdatalist(request):
 		rawdata = RawData.objects.all()
 		serializer = DataSerializer(rawdata, many=True)
 		return JSONResponse(serializer.data)
-
-
-def plot(request, chartID = 'rawdatachart', chart_type = 'line', chart_height = 500):
-	data = ChartData.raw_data()
-	title = "{text:'Raw Data'}"
-	xAxis = {"title": {"text": 'Timestamp'}, "categories": data['timestamp']}
-	yAxis = {"title": {"text": 'Data'}}
-	series = [
-		{"name": 'Temperature (F)', "data": data['tempf']}, 
-		{"name": 'Wind Speed', "data": data['windspeedmph']},
-		{"name": 'Rain', "data": data['rainin']}
-		]
-	return render(request, 'webapp/highchart_script.html', {'chartID': chartID, 'title': title,'xAxis': xAxis, 'yAxis': yAxis, 'series':series})
 
 class BarView(HighChartsMultiAxesView):
 	title = 'Example Data Chart'
@@ -149,9 +109,10 @@ class BarView(HighChartsMultiAxesView):
 		]
 		return series
 
-class AdvancedGraph(HighChartsMultiAxesView):
-	title = 'Advanced graph'
-	subtitle = 'params and query'
+class AdvancedGraph(HighChartsStockView):
+	title = 'Example Data Chart'
+	subtitle = ''
+	chart_type = ''
 	chart = {'zoomType': 'xy'}
 	tooltip = {'shared': 'true'}
 	legend = {
@@ -161,23 +122,31 @@ class AdvancedGraph(HighChartsMultiAxesView):
 		'y': 30
 	}
 
-	def get_data(self):
-		f = RawData.objects.all()
-		cursor = connection.cursor()
-		# cursor.execute("SELECT timestamp, winddir from rawdata", [f.pk])
-		graph = cursor.fetchall()
-		timestamp = list()
-		winddir = list()
 
-		for i in range(0, len(graph)):
-			timestamp.append(rows[i][9])
-			winddir.append(rows[i][3])
+	def get_data(self):
+		data = {'id': [], 'winddir': [], 'rainin':[]}
+		f = RawData.objects.all()
+		for unit in f:
+			data['id'].append(unit.id)
+			data['winddir'].append(unit.winddir)
+			data['rainin'].append(unit.rainin)
+
 
 		#### SERIES
-		self.serie = graph[0]
+		self.serie = [
+			{
+			'name': 'Winddir',
+			'data': data['winddir']
+			},
+			{
+			'name': 'Rainin',
+			'data': data['rainin']
+			}
+		]
 
 		##### X LABELS
-		self.categories = graph[1]
+		self.categories = data['id']
+		# self.axis = data['id']
 
 		##### Y AXIS DEFINITIONS
 		self.yaxis = {
