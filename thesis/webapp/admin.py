@@ -6,7 +6,7 @@ class RawDataWeatherAdmin(admin.ModelAdmin):
 	fields = ['winddir', 'windspeedmph', 'windspdmph_avg2m', 'rainin', 'dailyrainin', 'humidity', 'tempf', 'pressure', 'timestamp']
 	list_display = ('winddir','windspeedmph','rainin','timestamp')
 	list_filter = ['timestamp']
-
+	
 class RawDataAMPSAdmin(admin.ModelAdmin):
 	fields = ['grid', 'load', 'batt_curr', 'batt_volt', 'SP_curr', 'SP_volt', 'SP_pow', 'timestamp']
 	list_display = ('grid', 'load', 'batt_curr', 'batt_volt', 'SP_curr', 'SP_volt', 'SP_pow', 'timestamp')

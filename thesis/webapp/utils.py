@@ -1,45 +1,72 @@
 #all the commands were run in the python
 import datetime
 from django.contrib import messages
-from .models import RawData_Weather
+from .models import RawData_AMPS, RawData_Weather
 import csv
 
 
 def handle_upload_file(f):
 	dataReader=csv.reader(f.read().decode().splitlines(), delimiter=',', quotechar='"')
 	for row in dataReader:
-		datacsv=RawData_Weather()
+		datacsvweather=RawData_Weather()
+		datacsvamps = RawData_AMPS()
 		try:
-			datacsv.winddir = int(row[0])
+			datacsvamps.grid = int(row[0])
 		except(ValueError):
-			datacsv.winddir = None
+			datacsvamps.grid = None
 		try:
-			datacsv.windspeedmph = float(row[1])
+			datacsvamps.load = float(row[1])
 		except(ValueError):
-			datacsv.windspeedmph = None
+			datacsvamps.load = None
 		try:
-			datacsv.windspdmph_avg2m = float(row[2])
+			datacsvamps.batt_curr = float(row[2])
 		except(ValueError):
-			datacsv.windspdmph_avg2m = None
+			datacsvamps.batt_curr = None
 		try:
-			datacsv.rainin = float(row[3])
+			datacsvamps.batt_volt = float(row[3])
 		except(ValueError):
-			datacsv.rainin = None
+			datacsvamps.batt_volt = None
 		try:
-			datacsv.dailyrainin = float(row[4])
+			datacsvamps.SP_curr = float(row[4])
 		except(ValueError):
-			datacsv.dailyrainin = None
+			datacsvamps.SP_curr = None
 		try:
-			datacsv.humidity = float(row[5])
+			datacsvamps.SP_volt = float(row[5])
 		except(ValueError):
-			datacsv.humidity = None
+			datacsvamps.SP_volt = None
 		try:
-			datacsv.tempf = float(row[6])
+			datacsvweather.winddir = float(row[6])
 		except(ValueError):
-			datacsv.tempf = None
+			datacsvweather.winddir = None
 		try:
-			datacsv.pressure = float(row[7])
+			datacsvweather.windspeedmph = float(row[7])
 		except(ValueError):
-			datacsv.pressure = None
-		datacsv.timestamp=datetime.datetime.strptime(row[8], '%m/%d/%Y %H:%M')
-		datacsv.save()
+			datacsvweather.windspeedmph = None
+		try:
+			datacsvweather.windspdmph_avg2m = float(row[8])
+		except(ValueError):
+			datacsvweather.windspdmph_avg2m = None
+		try:
+			datacsvweather.rainin = float(row[9])
+		except(ValueError):
+			datacsvweather.rainin = None
+		try:
+			datacsvweather.dailyrainin = float(row[10])
+		except(ValueError):
+			datacsvweather.dailyrainin = None
+		try:
+			datacsvweather.humidity = float(row[11])
+		except(ValueError):
+			datacsvweather.humidity = None
+		try:
+			datacsvweather.tempf = float(row[12])
+		except(ValueError):
+			datacsvweather.tempf = None
+		try:
+			datacsvweather.pressure = float(row[13])
+		except(ValueError):
+			datacsvweather.pressure = None
+		datacsvweather.timestamp=datetime.datetime.strptime(row[14], '%m/%d/%Y %H:%M')
+		datacsvamps.timestamp=datetime.datetime.strptime(row[14], '%m/%d/%Y %H:%M')
+		datacsvweather.save()
+		datacsvamps.save()
