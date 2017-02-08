@@ -1,15 +1,15 @@
+import time
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import RawData
+from .models import RawData_Weather
 from webapp.forms import UploadCSVFile
-from webapp.utils import handle_upload_file, ChartData
+from webapp.utils import handle_upload_file
 from django.contrib import messages
 from chartit import DataPool, Chart
 
 from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
-from rest_framework.renderers import JSONRenderer
 from webapp.serializers import DataSerializer
 
 from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView, HighChartsSpeedometerView, HighChartsHeatMapView, HighChartsPolarView, HighChartsStockView)
@@ -34,31 +34,15 @@ def csv(request):
 
 class DataListView(APIView):
 	def get(self, request):
-		data = RawData.objects.values('winddir', 'rainin')
+		data = RawData_Weather.objects.values('winddir', 'rainin')
 		return Response(data)
-
-class JSONResponse(HttpResponse):
-	"""
-	An HttpResponse that renders its content into JSON.
-	"""
-	def __init__(self, data, **kwargs):
-		content = JSONRenderer().render(data)
-		kwargs['content_type'] = 'application/json'
-		super(JSONResponse, self).__init__(content, **kwargs)
-
-@csrf_exempt
-def rawdatalist(request):
-	if request.method == 'GET':
-		rawdata = RawData.objects.all()
-		serializer = DataSerializer(rawdata, many=True)
-		return JSONResponse(serializer.data)
 
 class BarView(HighChartsMultiAxesView):
 	title = 'Example Data Chart'
 	subtitle = ''
 	categories = ['Orange', 'Bananas', 'Apples']
 	chart_type = ''
-	chart = {'zoomType': 'xy'}
+	chart = {'zoomType': 'x'}
 	tooltip = {'shared': 'true'}
 	legend = {'layout': 'horizontal', 'align': 'left',
 			  'floating': 'true', 'verticalAlign': 'top',
@@ -109,7 +93,7 @@ class BarView(HighChartsMultiAxesView):
 		]
 		return series
 
-class AdvancedGraph(HighChartsStockView):
+class AdvancedGraph(HighChartsMultiAxesView):
 	title = 'Example Data Chart'
 	subtitle = ''
 	chart_type = ''
@@ -122,33 +106,18 @@ class AdvancedGraph(HighChartsStockView):
 		'y': 30
 	}
 
-
 	def get_data(self):
-		data = {'id': [], 'winddir': [], 'rainin':[]}
-		f = RawData.objects.all()
+		data = {'id': [], 'winddir': [], 'rainin':[], 'timestamp':[]}
+		f = RawData_Weather.objects.all()
 		for unit in f:
 			data['id'].append(unit.id)
+			data['timestamp'].append(unit.timestamp)
 			data['winddir'].append(unit.winddir)
 			data['rainin'].append(unit.rainin)
 
 
-		#### SERIES
-		self.serie = [
-			{
-			'name': 'Winddir',
-			'data': data['winddir']
-			},
-			{
-			'name': 'Rainin',
-			'data': data['rainin']
-			}
-		]
-
-		##### X LABELS
-		self.categories = data['id']
-		# self.axis = data['id']
-
-		##### Y AXIS DEFINITIONS
+		self.categories = data['timestamp']
+		
 		self.yaxis = {
 			'title': {
 				'text': 'Title 1'
@@ -161,8 +130,24 @@ class AdvancedGraph(HighChartsStockView):
 				}
 			]
 		}
+		self.serie = [
+			{
+			'name': 'Winddir',
+			'data': data['winddir']
+			}
+			# {
+			# 'name': 'Rainin',
+			# 'data': data['rainin']
+			# }
+		]
+
+		##### X LABELS
+		# self.axis = data['id']
+		
 
 		##### SERIES WITH VALUES
 		self.series = self.serie
 		data = super(AdvancedGraph, self).get_data()
 		return data
+
+# int(time.mktime(unit.timestamp.timetuple())*1000)

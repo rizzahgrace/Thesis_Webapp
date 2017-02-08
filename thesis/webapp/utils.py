@@ -1,14 +1,14 @@
 #all the commands were run in the python
 import datetime
 from django.contrib import messages
-from .models import RawData
+from .models import RawData_Weather
 import csv
 
 
 def handle_upload_file(f):
 	dataReader=csv.reader(f.read().decode().splitlines(), delimiter=',', quotechar='"')
 	for row in dataReader:
-		datacsv=RawData()
+		datacsv=RawData_Weather()
 		try:
 			datacsv.winddir = int(row[0])
 		except(ValueError):
@@ -43,15 +43,3 @@ def handle_upload_file(f):
 			datacsv.pressure = None
 		datacsv.timestamp=datetime.datetime.strptime(row[8], '%m/%d/%Y %H:%M')
 		datacsv.save()
-
-class ChartData(object):    
-	def raw_data():
-		rawdata = RawData.objects.all()
-		data = {'timestamp': [], 'tempf': [],
-				 'windspeedmph': [], 'rainin': []}
-		for unit in rawdata:
-			data['timestamp'].append(unit.timestamp)
-			data['tempf'].append(unit.tempf)
-			data['windspeedmph'].append(unit.windspeedmph)
-			data['rainin'].append(unit.rainin)
-		return data
