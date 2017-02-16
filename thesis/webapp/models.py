@@ -6,13 +6,13 @@ from django.contrib.auth.models import User
 # Create your models here.
 class RawData_Weather(models.Model):
 	winddir = models.IntegerField()
-	windspeedmph = models.DecimalField(max_digits=6, decimal_places=2, null=True)
-	windspdmph_avg2m = models.DecimalField(max_digits=6, decimal_places=2, null=True)
-	rainin = models.DecimalField(max_digits=6, decimal_places=2, null=True)
-	dailyrainin = models.DecimalField(max_digits=6, decimal_places=2, null=True)
-	humidity = models.DecimalField(max_digits=6, decimal_places=2, null=False)
-	tempf = models.DecimalField(max_digits=6, decimal_places=2, null=True)
-	pressure = models.DecimalField(max_digits=6, decimal_places=2, null=True)
+	windspeedmph = models.FloatField(null=True)
+	windspdmph_avg2m = models.FloatField(null=True)
+	rainin = models.FloatField(null=True)
+	dailyrainin = models.FloatField(null=True)
+	humidity = models.FloatField(null=False)
+	tempf = models.FloatField(null=True)
+	pressure = models.FloatField(null=True)
 	timestamp = models.DateTimeField('date logged', default = now)
 
 	def check_values(record):
