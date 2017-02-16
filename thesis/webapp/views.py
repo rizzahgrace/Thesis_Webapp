@@ -138,7 +138,7 @@ class AdvancedGraph(HighChartsMultiAxesView):
 			# {
 			# 'name': 'Rainin',
 			# 'data': data['rainin']
-			# }
+			# } 
 		]
 
 		##### X LABELS

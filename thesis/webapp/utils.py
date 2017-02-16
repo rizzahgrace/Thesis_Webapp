@@ -68,5 +68,6 @@ def handle_upload_file(f):
 			datacsvweather.pressure = None
 		datacsvweather.timestamp=datetime.datetime.strptime(row[14], '%m/%d/%Y %H:%M')
 		datacsvamps.timestamp=datetime.datetime.strptime(row[14], '%m/%d/%Y %H:%M')
-		datacsvweather.save()
 		datacsvamps.save()
+		datacsvweather.save()
+		
