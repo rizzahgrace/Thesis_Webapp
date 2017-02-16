@@ -1,7 +1,7 @@
 import time
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import RawData_Weather
+from .models import RawData_Weather, RawData_AMPS
 from webapp.forms import UploadCSVFile
 from webapp.utils import handle_upload_file
 from django.contrib import messages
@@ -15,7 +15,7 @@ from webapp.serializers import DataSerializer
 from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView, HighChartsSpeedometerView, HighChartsHeatMapView, HighChartsPolarView, HighChartsStockView)
 # Create your views here.
 def index(request):
-	return render(request, 'webapp/home.html')
+	return render(request, 'webapp/power.html')
 
 def csv(request):
 	if request.method == 'POST':
@@ -151,3 +151,60 @@ class AdvancedGraph(HighChartsMultiAxesView):
 		return data
 
 # int(time.mktime(unit.timestamp.timetuple())*1000)
+
+class PowerGraph(HighChartsMultiAxesView):
+	title = 'Power'
+	subtitle = ''
+	chart_type = ''
+	chart = {'zoomType': 'xy'}
+	tooltip = {'shared': 'true'}
+	legend = {
+		'layout': 'vertical',
+		'align': 'left',
+		'verticalAlign': 'top',
+		'y': 30
+	}
+
+	def get_data(self):
+		data = {'id': [], 'load': [], 'SP_volt':[], 'timestamp':[]}
+		f = RawData_AMPS.objects.all()
+		for unit in f:
+			data['id'].append(unit.id)
+			data['timestamp'].append(unit.timestamp)
+			data['load'].append(unit.load)
+			data['SP_volt'].append(unit.SP_volt)
+
+
+		self.categories = data['timestamp']
+		
+		self.yaxis = {
+			'title': {
+				'text': 'Title 1'
+			},
+			'plotLines': [
+				{
+					'value': 0,
+					'width': 1,
+					'color': '#808080'
+				}
+			]
+		}
+		self.serie = [
+			{
+			'name': 'Load',
+			'data': data['load']
+			},
+			{
+			'name': 'Voltage',
+			'data': data['SP_volt']
+			} 
+		]
+
+		##### X LABELS
+		# self.axis = data['id']
+		
+
+		##### SERIES WITH VALUES
+		self.series = self.serie
+		data = super(PowerGraph, self).get_data()
+		return data
