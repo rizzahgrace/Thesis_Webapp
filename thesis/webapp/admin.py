@@ -4,7 +4,7 @@ from .models import RawData_Weather, RawData_AMPS
 # Register your models here.
 class RawDataWeatherAdmin(admin.ModelAdmin):
 	fields = ['winddir', 'windspeedmph', 'windspdmph_avg2m', 'rainin', 'dailyrainin', 'humidity', 'tempf', 'pressure', 'timestamp']
-	list_display = ('winddir','windspeedmph','rainin','timestamp')
+	list_display = ('winddir', 'windspeedmph', 'windspdmph_avg2m', 'rainin', 'dailyrainin', 'humidity', 'tempf', 'pressure', 'timestamp')
 	list_filter = ['timestamp']
 	
 class RawDataAMPSAdmin(admin.ModelAdmin):

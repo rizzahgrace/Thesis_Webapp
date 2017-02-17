@@ -35,11 +35,15 @@ def handle_upload_file(f):
 		except(ValueError):
 			datacsvamps.SP_volt = None
 		try:
+			datacsvamps.SP_pow = (float(row[4])*float(row[5]))
+		except(ValueError):
+			datacsvamps.SP_pow = None	
+		try:
 			datacsvweather.winddir = float(row[6])
 		except(ValueError):
 			datacsvweather.winddir = None
 		try:
-			datacsvweather.windspeedmph = float(row[7])
+			datacsvweather.windspeedmph = (float(row[7])*1.6093440)
 		except(ValueError):
 			datacsvweather.windspeedmph = None
 		try:
@@ -59,7 +63,7 @@ def handle_upload_file(f):
 		except(ValueError):
 			datacsvweather.humidity = None
 		try:
-			datacsvweather.tempf = float(row[12])
+			datacsvweather.tempf = (((float(row[12])-32)*5)/9)
 		except(ValueError):
 			datacsvweather.tempf = None
 		try:
