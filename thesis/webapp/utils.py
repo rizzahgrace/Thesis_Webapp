@@ -74,4 +74,6 @@ def handle_upload_file(f):
 		datacsvamps.timestamp=datetime.datetime.strptime(row[14], '%m/%d/%Y %H:%M')
 		datacsvweather.save()
 		datacsvamps.save()
-		
+
+# def historical_weather(self):
+	

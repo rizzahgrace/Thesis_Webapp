@@ -1,0 +1,241 @@
+{% load static %}
+<!DOCTYPE html>
+<!---THIS ONE-->
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Solar Power Management</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href={% static 'webapp/materialize.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href={% static 'webapp/style.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body bgcolor = "#B3E5FC">
+  <div class = "navbar-fixed">
+  <nav class="light-blue accent-4" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo center">
+      <span class = "grey-text text-darken-3">
+      Solar Energy Management</a></span>
+      <ul class="left hide-on-med-and-down">
+        <li>
+          <a href="index.html"><img src={% static 'webapp/images/nl2.png' %} width = "50" height = "50"></a>
+          </li>
+      </ul>
+      <ul class="right hide-on-med-and-down">
+        <li>
+          <a href="index.html">
+              <script type="text/javascript">
+                
+                tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+
+                function GetClock(){
+                var d=new Date();
+                var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getYear();
+                if(nyear<1000) nyear+=1900;
+                var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds(),ap;
+
+                if(nhour==0){ap=" AM";nhour=12;}
+                else if(nhour<12){ap=" AM";}
+                else if(nhour==12){ap=" PM";}
+                else if(nhour>12){ap=" PM";nhour-=12;}
+
+                if(nmin<=9) nmin="0"+nmin;
+                if(nsec<=9) nsec="0"+nsec;
+
+                document.getElementById('clockbox').innerHTML=""+tmonth[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
+                }
+
+                window.onload=function(){
+                GetClock();
+                setInterval(GetClock,1000);
+                }
+                </script>
+                <div id="clockbox"></div>
+
+
+          </a>
+          </li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#"><img src={% static 'webapp/images/sol0.png' %} ></a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  </div>
+<div class = "container">
+   <div class="row">
+
+      
+      <div class = "col s12"><br></div>
+      
+       <div class="col s12">
+      <div class = "card light-blue lighten-2">
+          <div class = "card-content gray-text">
+                  <div class="slider">
+                <ul class="slides">
+                  <li>
+                    <img src={% static 'webapp/images/ps1.jpg' %}> <!-- random image -->
+                    <div class="caption center-align">
+                      <h3 class=" grey-text text-darken-4">Solar Management Solutions </h3>
+                      <h5 class="light grey-text text-darken-4">Here's a blurb.</h5>
+                    </div>
+                  </li>
+                  <li>
+                    <img src={% static 'webapp/images/ps2.jpg' %}> <!-- random image -->
+                    <div class="caption left-align">
+                      <h3 class=" grey-text text-darken-4">The Sun Gives Savings</h3>
+                      <h5 class="light grey-text text-darken-4">Another blurb.</h5>
+                    </div>
+                  </li>
+                  <li>
+                    <img src={% static 'webapp/images/sl3.jpg' %}> <!-- random image -->
+                    <div class="caption right-align">
+                      <h3 class=" grey-text text-darken-4">It's a big glowing ball</h3>
+                      <h5 class="light grey-text text-darken-4">And it's hot.</h5>
+                    </div>
+                  </li>
+                </ul>
+  </div>
+      
+          </div>
+        </div>
+      </div>
+
+<!--
+      <div class="col s12">
+      <div class = "card light-blue lighten-1">
+          <div class = "card-content gray-text">
+            <p>Test Content</p>
+          </div>
+        </div>
+      </div>
+-->
+      <div class = "col s4">
+        <div class = "card light-blue lighten-1">
+          <div class = "card-content gray-text">
+            <center>
+              <br>
+            <img src={% static 'webapp/images/spl.png' %} width="256" height="256" >
+            <br>
+            
+            <p>
+              <h5>
+              TITLE</h5>
+            </p>
+            <p>
+              Remain lively hardly needed at do by. Two you fat downs fanny three. True mr gone most at. Dare as name just when with it body. Travelling inquietude she increasing off impossible the. Cottage be noisier looking to we promise on. Disposal to kindness appetite diverted learning of on raptures. 
+            </p>
+           
+            <br>
+            <a class="waves-effect waves-light btn" href = "weather">
+             
+              Enter</a>
+          </center>
+          </div>
+        </div>
+      </div>
+
+
+       <div class = "col s4">
+        <div class = "card light-blue lighten-1">
+          <div class = "card-content gray-text">
+            <center>
+              <br>
+            <img src={% static 'webapp/images/plgl.png' %} width="256" height="256" >
+            <br>
+            
+            <h5>
+              TITLE</h5>
+            <p>
+              Remain lively hardly needed at do by. Two you fat downs fanny three. True mr gone most at. Dare as name just when with it body. Travelling inquietude she increasing off impossible the. Cottage be noisier looking to we promise on. Disposal to kindness appetite diverted learning of on raptures. 
+            </p>
+           
+            <br>
+            <a class="waves-effect waves-light btn">Enter</a>
+          </center>
+            
+          </div>
+        </div>
+      </div>
+
+
+       <div class = "col s4">
+        <div class = "card light-blue lighten-1">
+          <div class = "card-content gray-text">
+            <center>
+              <br>
+            <img src={% static 'webapp/images/cl.png' %} width="256" width="256" height="256" >
+            <br>
+            <h5>
+              TITLE</h5>
+            <p>
+              Remain lively hardly needed at do by. Two you fat downs fanny three. True mr gone most at. Dare as name just when with it body. Travelling inquietude she increasing off impossible the. Cottage be noisier looking to we promise on. Disposal to kindness appetite diverted learning of on raptures. 
+            </p>
+           
+            <br>
+            <a class="waves-effect waves-light btn">Enter</a>
+          </center>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+
+</div>   
+
+ 
+
+  <footer class="page-footer light-blue accent-4">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Solar G</h5>
+          <p class="grey-text text-lighten-4">Solar G. Development of a Real-Time Energy Monitoring System for a Hybrid Solar Power System with Integrated Power Prediction. </p><p class="grey-text text-lighten-4">Ateneo de Manila University.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Contacts</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Email ni Julius</a></li>
+            <li><a class="white-text" href="#!">Email ni Rizzah</a></li>
+            <li><a class="white-text" href="#!">Email ni Ate Tin</a></li>
+            <li><a class="white-text" href="#!">Email ni Fr. Jett</a></li>
+          </ul>
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Other Energies</h5>
+          <ul>
+            <li><a class="white-text" href="#!">Coal</a></li>
+            <li><a class="white-text" href="#!">Hydro</a></li>
+            <li><a class="white-text" href="#!">Wind</a></li>
+            <li><a class="white-text" href="#!">Bio</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      <a class="orange-text text-lighten-3" href="http://materializecss.com">JS2017V2</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script>
+   $(document).ready(function () {
+       $('.slider').slider({full_width: true});
+   });
+</script>
+  <script src={% static 'js/materialize.js' %}></script>
+  <script src={% static 'js/init.js' %}></script>
+
+  </body>
+</html>

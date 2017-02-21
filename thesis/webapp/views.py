@@ -1,4 +1,4 @@
-import time
+import datetime
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import RawData_Weather, RawData_AMPS
@@ -15,7 +15,10 @@ from webapp.serializers import DataSerializer
 from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView, HighChartsSpeedometerView, HighChartsHeatMapView, HighChartsPolarView, HighChartsStockView)
 # Create your views here.
 def index(request):
-	return render(request, 'webapp/power.html')
+	return render(request, 'webapp/index.html')
+
+def weather(request):
+	return render(request, 'webapp/weather.html')
 
 def csv(request):
 	if request.method == 'POST':
@@ -111,7 +114,7 @@ class AdvancedGraph(HighChartsMultiAxesView):
 		f = RawData_Weather.objects.all()
 		for unit in f:
 			data['id'].append(unit.id)
-			data['timestamp'].append(unit.timestamp)
+			data['timestamp'].append(unit.timestamp.strftime('%I:%M'))
 			data['winddir'].append(unit.winddir)
 			data['rainin'].append(unit.rainin)
 
@@ -170,7 +173,7 @@ class PowerGraph(HighChartsMultiAxesView):
 		f = RawData_AMPS.objects.all()
 		for unit in f:
 			data['id'].append(unit.id)
-			data['timestamp'].append(unit.timestamp)
+			data['timestamp'].append(datetime.datetime.strptime(unit.timestamp, '%m/%d/%Y %H:%M'))
 			data['load'].append(unit.load)
 			data['SP_volt'].append(unit.SP_volt)
 
