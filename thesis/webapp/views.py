@@ -14,6 +14,12 @@ from webapp.serializers import DataSerializer
 
 from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView, HighChartsSpeedometerView, HighChartsHeatMapView, HighChartsPolarView, HighChartsStockView)
 # Create your views here.
+def loading(request):
+	return render(request, 'webapp/loading.html')
+
+def login(request):
+	return render(request, 'webapp/login.html')
+
 def index(request):
 	return render(request, 'webapp/index.html')
 

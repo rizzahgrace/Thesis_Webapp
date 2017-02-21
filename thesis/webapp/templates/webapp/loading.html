@@ -1,0 +1,97 @@
+{% load static %}
+<html>
+    
+    <html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <meta http-equiv="refresh" content="3;url=login" />
+  <title>Solar Power Management</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href={% static 'webapp/materialize.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href={% static 'webapp/style.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+    <body bgcolor = "#B3E5FC">
+
+      <div class = "row">
+        <div class = "col s4">
+          <br>
+          <br>
+          <br>
+          <br>
+        </div>
+        <div class = "col s4">
+          <br>
+          <br>
+          <br>
+          <br>
+        </div>
+        <div class = "col s4">
+          <br>
+          <br>
+          <br>
+          <br>
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col s4">
+          <br>
+          <br>
+          <br>
+        </div>
+        <div class = "col s4">
+        <center>
+          <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </center>
+      </div>
+        </div>
+        <div class = "col s4">
+          <br>
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col s4">
+          <br>
+        </div>
+        <div class = "col s4">
+          <br>
+        </div>
+        <div class = "col s4">
+          <br>
+        </div>
+      </div>
+      <div class = "row">
+        <div class = "col s4">
+          <br>
+        </div>
+        <div class = "col s4">
+          <br>
+        <h3>  <center>AMPS Solar Energy Management</center></h3>
+        </div>
+        <div class = "col s4">
+          <br>
+        </div>
+      </div>
+          
+
+         <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script>
+   $(document).ready(function () {
+       $('.slider').slider({full_width: true});
+   });
+</script>
+  <script src={% static 'js/materialize.js' %}></script>
+  <script src={% static 'js/init.js' %}></script>
+    </body>
+</html>

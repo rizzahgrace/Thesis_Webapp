@@ -7,7 +7,9 @@ from webapp import views
 app_name = 'webapp'
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.loading, name='loading'),
+    url(r'^login', views.login, name='login'),
+    url(r'^home', views.index, name='index'),
     url(r'^csv', views.csv, name='csv'),
     url(r'^weather', views.weather, name='weather'),
     url(r'^rawdata', views.DataListView.as_view(), name='rawdata'),
