@@ -4,6 +4,17 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 # Create your models here.
+class Owner(models.Model):
+	last_name = models.CharField(max_length=50, unique=True)
+	first_name = models.CharField(max_length=100)
+	AMPS_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+	def __unicode__(self):
+		return self.plant_name
+
+	def __str__(self):
+		return self.plant_name
+		
 class RawData_Weather(models.Model):
 	winddir = models.IntegerField()
 	windspeedmph = models.FloatField(null=True)
@@ -30,4 +41,6 @@ class RawData_AMPS(models.Model):
 	SP_volt = models.FloatField(null=True)
 	SP_pow = models.FloatField(null=True)
 	timestamp = models.DateTimeField('date logged', default = now)
-	AMPS_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	owner = models.ForeignKey(Owner, on_delete=models.CASCADE, null=True)
+
+

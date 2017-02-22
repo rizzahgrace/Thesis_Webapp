@@ -1,6 +1,9 @@
 .vagrant/machine/*
 thesis/webapp/__pycache__/*
 thesis/webapp/migrations/__pycache__/*
-thesis/webapp/static/*
+thesis/webapp/static/js/highcharts/*
+thesis/webapp/static/rest_framework/*
+thesis/webapp/static/admin/*
+thesis/webapp/static/chartit/*
 gm/*
 _MACOSX/*

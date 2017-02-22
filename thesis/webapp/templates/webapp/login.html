@@ -21,12 +21,12 @@
       Solar Energy Management</a></span>
       <ul class="left hide-on-med-and-down">
         <li>
-          <a href="home"><img class = "responsive-img" src={% static 'webapp/images/nl2.png' %} width = "50" height = "50"></a>
+          <a href="index"><img class = "responsive-img" src={% static 'webapp/images/nl2.png' %} width = "50" height = "50"></a>
           </li>
       </ul>
       <ul class="right hide-on-med-and-down">
         <li>
-          <a href="home">
+          <a href="index">
               <script type="text/javascript">
                 
                 tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
@@ -100,7 +100,7 @@
                 </div>
               </div>
               <center>
-              <a class="waves-effect waves-light btn" href = "home">Log-In</a>
+              <a class="waves-effect waves-light btn" href = "index">Log-In</a>
             </center>
             </div>
             
@@ -124,16 +124,19 @@
                 <div class="modal-content">
                   <h4>Register</h4>
                        <div class="row">
-                        <form class="col s12">
+                        <form class="col s12", method="POST">
+                          {% csrf_token %}
                           <div class="row">
                             <div class="input-field col s6">
                               <input id="first_name" type="text" class="validate">
-                              <label for="first_name">First Name</label>
+                              <label for="{{ form.first_name.id_for_label }}">First Name</label>
                             </div>
+                            <div>{{ form.first_name }}</div>
                             <div class="input-field col s6">
                               <input id="last_name" type="text" class="validate">
-                              <label for="last_name">Last Name</label>
+                              <label for="{{ form.last_name.id_for_label }}">Last Name</label>
                             </div>
+                            <div>{{ form.last_name }}</div>
                           </div>
                           <div class="row">
                             <div class="input-field col s12">
