@@ -6,14 +6,15 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Owner(models.Model):
 	last_name = models.CharField(max_length=50, unique=True)
-	first_name = models.CharField(max_length=100)
+	first_name = models.CharField(max_length=50)
+	address = models.CharField(max_length=150)
 	AMPS_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 	def __unicode__(self):
-		return self.plant_name
+		return self.last_name
 
 	def __str__(self):
-		return self.plant_name
+		return self.last_name
 		
 class RawData_Weather(models.Model):
 	winddir = models.IntegerField()

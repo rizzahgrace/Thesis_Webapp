@@ -5,7 +5,7 @@ from .models import RawData_AMPS, RawData_Weather
 import csv
 
 
-def handle_upload_file(f):
+def handle_upload_file(f, owner):
 	dataReader=csv.reader(f.read().decode().splitlines(), delimiter=',', quotechar='"')
 	for row in dataReader:
 		datacsvweather=RawData_Weather()
@@ -37,7 +37,8 @@ def handle_upload_file(f):
 		try:
 			datacsvamps.SP_pow = (float(row[4])*float(row[5]))
 		except(ValueError):
-			datacsvamps.SP_pow = None	
+			datacsvamps.SP_pow = None
+		
 		try:
 			datacsvweather.winddir = float(row[6])
 		except(ValueError):
@@ -72,6 +73,7 @@ def handle_upload_file(f):
 			datacsvweather.pressure = None
 		datacsvweather.timestamp=datetime.datetime.strptime(row[14], '%m/%d/%Y %H:%M')
 		datacsvamps.timestamp=datetime.datetime.strptime(row[14], '%m/%d/%Y %H:%M')
+		datacsvamps.owner = owner
 		datacsvweather.save()
 		datacsvamps.save()
 

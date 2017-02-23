@@ -1,9 +1,11 @@
 import datetime
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.contrib import messages
 from .models import RawData_Weather, RawData_AMPS
 from webapp.forms import UploadCSVFile
 from webapp.utils import handle_upload_file
+from webapp.forms import recordOwner
 from django.contrib import messages
 from chartit import DataPool, Chart
 
@@ -31,7 +33,8 @@ def csv(request):
 		form = UploadCSVFile(request.POST, request.FILES)
 		
 		if form.is_valid():
-			handle_upload_file(request.FILES['csvfile'])
+			owner = form.cleaned_data['owner']
+			handle_upload_file(request.FILES['csvfile'], owner)
 			messages.success(request, 'Record saved')
 	else:
 		form = UploadCSVFile()
@@ -40,67 +43,24 @@ def csv(request):
 
 #for using Chartit
 #error says Nonetype object not subscriptable
-
-class DataListView(APIView):
-	def get(self, request):
-		data = RawData_Weather.objects.values('winddir', 'rainin')
-		return Response(data)
-
-class BarView(HighChartsMultiAxesView):
-	title = 'Example Data Chart'
-	subtitle = ''
-	categories = ['Orange', 'Bananas', 'Apples']
-	chart_type = ''
-	chart = {'zoomType': 'x'}
-	tooltip = {'shared': 'true'}
-	legend = {'layout': 'horizontal', 'align': 'left',
-			  'floating': 'true', 'verticalAlign': 'top',
-			  'y': -10, 'borderColor': '#e3e3e3'}
-
-	@property
-	def yaxis(self):
-		y_axis = [
-			{'labels': {'format': '{value} pz/sc ', 'style': {'color': '#f67d0a'}},
-			 'title': {'text': "Oranges", 'style': {'color': '#f67d0a'}},
-			 'opposite': 'true'},
-			{'gridLineWidth': 1,
-			 'title': {'text': "Bananas", 'style': {'color': '#3771c8'}},
-			 'labels': {'style': {'color': '#3771c8'}, 'format': '{value} euro'}},
-			{'gridLineWidth': 1,
-			 'title': {'text': "Apples", 'style': {'color': '#666666'}},
-			 'labels': {'format': '{value} pz', 'style': {'color': '#666666'}},
-			 'opposite': 'true'}
-		]
-		return y_axis
-
-	@property
-	def series(self):
-		series = [
-			{
-				'name': 'Orange',
-				'type': 'column',
-				'yAxis': 1,
-				'data': [90,44,55,67,4,5,6,3,2,45,2,3,2,45,5],
-				'tooltip': "{ valueSuffix: ' euro' }",
-				'color': '#3771c8'
-			},
-			{
-				'name': 'Bananas',
-				'type': 'spline',
-				'yAxis': 2,
-				'data': [12,34,34,34, 5,34,3,45,2,3,2,4,4,1,23],
-				'marker': { 'enabled': 'true' },
-				'dashStyle': 'shortdot',
-				'color': '#666666',
-				},
-			{
-				'name': 'Apples',
-				'type': 'spline',
-				'data': [12,23,23,23,21,4,4,76,3,66,6,4,5,2,3],
-				'color': '#f67d0a'
-			}
-		]
-		return series
+def register(request):
+	if request.method == 'POST':
+		form = recordOwner(request.POST)
+		if form.is_valid():
+			last_name = form.cleaned_data['last_name']
+			first_name = form.cleaned_data['first_name']
+			address = form.cleaned_data['address']
+			record = Owner(last_name=last_name, first_name=first_name, address=address)
+			record.save()
+			user = User.objects.create_user(
+			username=form.cleaned_data['username'],
+			password=form.cleaned_data['password1'],
+			email=form.cleaned_data['email']
+			)
+			messages.success(request, 'Record saved')            
+	else:
+		form = recordOwner()
+	return render(request, 'webapp/login.html', {'form': form})
 
 class AdvancedGraph(HighChartsMultiAxesView):
 	title = 'Example Data Chart'
