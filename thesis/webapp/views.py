@@ -3,9 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib import messages
 from .models import RawData_Weather, RawData_AMPS
-from webapp.forms import UploadCSVFile
+from webapp.forms import UploadCSVFile, recordOwner, recordUser
 from webapp.utils import handle_upload_file
-from webapp.forms import recordOwner
 from django.contrib import messages
 from chartit import DataPool, Chart
 
@@ -30,7 +29,7 @@ def weather(request):
 
 def csv(request):
 	if request.method == 'POST':
-		form = UploadCSVFile(request.POST, request.FILES)
+		form = UploadCSVFile(request.POST, request.FILES)	
 		
 		if form.is_valid():
 			owner = form.cleaned_data['owner']
@@ -41,26 +40,23 @@ def csv(request):
 
 	return render(request, 'webapp/csv.html', {'form': form})
 
-#for using Chartit
-#error says Nonetype object not subscriptable
 def register(request):
 	if request.method == 'POST':
-		form = recordOwner(request.POST)
-		if form.is_valid():
-			last_name = form.cleaned_data['last_name']
-			first_name = form.cleaned_data['first_name']
-			address = form.cleaned_data['address']
-			record = Owner(last_name=last_name, first_name=first_name, address=address)
-			record.save()
-			user = User.objects.create_user(
-			username=form.cleaned_data['username'],
-			password=form.cleaned_data['password1'],
-			email=form.cleaned_data['email']
-			)
-			messages.success(request, 'Record saved')            
+		userdata_form = recordOwner(request.POST)
+		user_form = recordUser(request.POST)
+		if userdata_form.is_valid():
+			last_name = userdata_form.cleaned_data['last_name']
+			first_name = userdata_form.cleaned_data['first_name']
+			address = userdata_form.cleaned_data['address']
+			owner = Owner(last_name=last_name, first_name=first_name, address=address)
+			# user = user_form.save()
+			owner.save()
+
 	else:
-		form = recordOwner()
-	return render(request, 'webapp/login.html', {'form': form})
+		userdata_form = recordOwner()
+		user_form = recordUser()
+
+	return render(request, 'webapp/register.html', {'userdata_form': userdata_form, 'user_form':user_form})
 
 class AdvancedGraph(HighChartsMultiAxesView):
 	title = 'Example Data Chart'

@@ -8,7 +8,7 @@ class Owner(models.Model):
 	last_name = models.CharField(max_length=50, unique=True)
 	first_name = models.CharField(max_length=50)
 	address = models.CharField(max_length=150)
-	AMPS_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	AMPS_user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
 	def __unicode__(self):
 		return self.last_name

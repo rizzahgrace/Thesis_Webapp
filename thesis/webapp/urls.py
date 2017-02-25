@@ -9,6 +9,7 @@ app_name = 'webapp'
 urlpatterns = [
     url(r'^$', views.loading, name='loading'),
     url(r'^login', views.login, name='login'),
+    url(r'^register', views.register, name='register'),
     url(r'^index', views.index, name='index'),
     url(r'^csv', views.csv, name='csv'),
     url(r'^weather', views.weather, name='weather'),
