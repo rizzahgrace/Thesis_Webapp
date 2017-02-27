@@ -2,7 +2,9 @@ import datetime
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib import messages
-from .models import RawData_Weather, RawData_AMPS
+from django.views.decorators.csrf import csrf_protect
+from .models import RawData_Weather, RawData_AMPS, Owner
+from django.contrib.auth.models import User
 from webapp.forms import UploadCSVFile, recordOwner, recordUser
 from webapp.utils import handle_upload_file
 from django.contrib import messages
@@ -40,23 +42,29 @@ def csv(request):
 
 	return render(request, 'webapp/csv.html', {'form': form})
 
+@csrf_protect
 def register(request):
 	if request.method == 'POST':
 		userdata_form = recordOwner(request.POST)
 		user_form = recordUser(request.POST)
-		if userdata_form.is_valid():
+		if userdata_form.is_valid() and user_form.is_valid():
 			last_name = userdata_form.cleaned_data['last_name']
 			first_name = userdata_form.cleaned_data['first_name']
 			address = userdata_form.cleaned_data['address']
 			owner = Owner(last_name=last_name, first_name=first_name, address=address)
-			# user = user_form.save()
+			# owner.save(commit=False)
+			user = User.objects.create_user(
+			username=user_form.cleaned_data['username'],
+			password=user_form.cleaned_data['password1'],
+			email=user_form.cleaned_data['email']
+			)
+			owner.AMPS_user = user
 			owner.save()
-
 	else:
 		userdata_form = recordOwner()
 		user_form = recordUser()
 
-	return render(request, 'webapp/register.html', {'userdata_form': userdata_form, 'user_form':user_form})
+	return render(request, 'webapp/register.html', {'userdata_form': userdata_form, 'user_form' : user_form})
 
 class AdvancedGraph(HighChartsMultiAxesView):
 	title = 'Example Data Chart'
