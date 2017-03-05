@@ -21,6 +21,11 @@ def loading(request):
 	return render(request, 'webapp/loading.html')
 
 def login(request):
+	username = request.POST['username']
+	password = request.POST['password']
+	user = authenticate(username=username, password=password)
+	if user is not None:
+		login(request, user)
 	return render(request, 'webapp/login.html')
 
 def index(request):
@@ -52,7 +57,6 @@ def register(request):
 			first_name = userdata_form.cleaned_data['first_name']
 			address = userdata_form.cleaned_data['address']
 			owner = Owner(last_name=last_name, first_name=first_name, address=address)
-			# owner.save(commit=False)
 			user = User.objects.create_user(
 			username=user_form.cleaned_data['username'],
 			password=user_form.cleaned_data['password1'],
@@ -139,6 +143,7 @@ class PowerGraph(HighChartsMultiAxesView):
 	}
 
 	def get_data(self):
+		#include here the user authentication 
 		data = {'id': [], 'load': [], 'SP_volt':[], 'timestamp':[]}
 		f = RawData_AMPS.objects.all()
 		for unit in f:
@@ -176,7 +181,6 @@ class PowerGraph(HighChartsMultiAxesView):
 		##### X LABELS
 		# self.axis = data['id']
 		
-
 		##### SERIES WITH VALUES
 		self.series = self.serie
 		data = super(PowerGraph, self).get_data()
