@@ -1,8 +1,10 @@
 import datetime
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, render_to_response
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from .models import RawData_Weather, RawData_AMPS, Owner
 from django.contrib.auth.models import User
 from webapp.forms import UploadCSVFile, recordOwner, recordUser
@@ -10,7 +12,6 @@ from webapp.utils import handle_upload_file
 from django.contrib import messages
 from chartit import DataPool, Chart
 
-from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from webapp.serializers import DataSerializer
@@ -20,19 +21,45 @@ from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView, HighCh
 def loading(request):
 	return render(request, 'webapp/loading.html')
 
-def login(request):
-	username = request.POST['username']
-	password = request.POST['password']
-	user = authenticate(username=username, password=password)
-	if user is not None:
-		login(request, user)
-	return render(request, 'webapp/login.html')
+# def login(request):
+# 	if request.method == 'POST':
+# 		username = request.POST.get('username', False)
+# 		password = request.POST.get('password', False)
+# 		user = authenticate(username=username, password=password)
+# 		if user is not None:
+# 			if user.is_active():
+# 				login(request, user)
+# 				return HttpResponseRedirect('/index')
+# 			else:
+# 				return HttpResponseRedirect("Your account does not exist.")
+# 		else:
+# 			return HttpResponse("Invalid details.")
+# 	else:
+# 		return render_to_response('registation/login.html')
+
+def login_user(request):
+	logout(request)
+	username = password = ''
+	if request.POST:
+		username = request.POST['username']
+		password = request.POST['password']
+
+		user = authenticate(username=username, password=password)
+		if user is not None:
+			if user.is_active:
+				login(request, user)
+				return HttpResponseRedirect('/index/')
+	return render_to_response('login.html', context_instance=RequestContext(request))
+
 
 def index(request):
 	return render(request, 'webapp/index.html')
 
 def weather(request):
 	return render(request, 'webapp/weather.html')
+
+def power(request):
+	return render(request, 'webapp/power.html')
 
 def csv(request):
 	if request.method == 'POST':
@@ -84,17 +111,17 @@ class AdvancedGraph(HighChartsMultiAxesView):
 	}
 
 	def get_data(self):
-		data = {'id': [], 'winddir': [], 'rainin':[], 'timestamp':[]}
+		data = {'id': [], 'windspeedmph': [], 'temperature':[], 'timestamp':[]}
 		f = RawData_Weather.objects.all()
 		for unit in f:
 			data['id'].append(unit.id)
 			data['timestamp'].append(unit.timestamp.strftime('%I:%M'))
-			data['winddir'].append(unit.winddir)
-			data['rainin'].append(unit.rainin)
+			data['windspeedmph'].append(unit.windspeedmph)
+			data['temperature'].append(unit.tempf)
 
 
 		self.categories = data['timestamp']
-		
+		 	
 		self.yaxis = {
 			'title': {
 				'text': 'Title 1'
@@ -109,13 +136,13 @@ class AdvancedGraph(HighChartsMultiAxesView):
 		}
 		self.serie = [
 			{
-			'name': 'Winddir',
-			'data': data['winddir']
-			}
-			# {
-			# 'name': 'Rainin',
-			# 'data': data['rainin']
-			# } 
+			'name': 'windspeedmph',
+			'data': data['windspeedmph']
+			},
+			{
+			'name': 'temperature',
+			'data': data['temperature']
+			} 
 		]
 
 		##### X LABELS
@@ -143,12 +170,15 @@ class PowerGraph(HighChartsMultiAxesView):
 	}
 
 	def get_data(self):
-		#include here the user authentication 
+		#include here the user authentication
+		# user = request.user
+		# owner = user
 		data = {'id': [], 'load': [], 'SP_volt':[], 'timestamp':[]}
+		# f = RawData_AMPS.objects.filter(owner = owner)
 		f = RawData_AMPS.objects.all()
 		for unit in f:
 			data['id'].append(unit.id)
-			data['timestamp'].append(datetime.datetime.strptime(unit.timestamp, '%m/%d/%Y %H:%M'))
+			data['timestamp'].append(unit.timestamp.strftime('%I:%M'))
 			data['load'].append(unit.load)
 			data['SP_volt'].append(unit.SP_volt)
 
