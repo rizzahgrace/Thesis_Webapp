@@ -21,22 +21,6 @@ from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView, HighCh
 def loading(request):
 	return render(request, 'webapp/loading.html')
 
-# def login(request):
-# 	if request.method == 'POST':
-# 		username = request.POST.get('username', False)
-# 		password = request.POST.get('password', False)
-# 		user = authenticate(username=username, password=password)
-# 		if user is not None:
-# 			if user.is_active():
-# 				login(request, user)
-# 				return HttpResponseRedirect('/index')
-# 			else:
-# 				return HttpResponseRedirect("Your account does not exist.")
-# 		else:
-# 			return HttpResponse("Invalid details.")
-# 	else:
-# 		return render_to_response('registation/login.html')
-
 def login_user(request):
 	logout(request)
 	username = password = ''

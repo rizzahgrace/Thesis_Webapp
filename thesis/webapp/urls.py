@@ -1,5 +1,6 @@
 from django.conf.urls import url, include
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 from django.contrib.auth import views
 from webapp.views import AdvancedGraph, PowerGraph
 from rest_framework.urlpatterns import format_suffix_patterns
@@ -9,7 +10,7 @@ app_name = 'webapp'
 
 urlpatterns = [
     url(r'^$', views.loading, name='loading'),
-    url(r'^login/$', views.login, name='login'),
+    url(r'^login/$', auth_views.login, {'template_name': 'webapp/login.html'}, name='login'),
     url(r'^register', views.register, name='register'),
     url(r'^index', views.index, name='index'),
     url(r'^csv', views.csv, name='csv'),

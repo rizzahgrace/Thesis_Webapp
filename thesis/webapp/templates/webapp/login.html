@@ -89,43 +89,12 @@
               
                           <div class="row">
                 <div class="input-field col s12">
-                  {% block content %}
-
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
-
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
-
-<form method="post" action="{% url 'webapp/login' %}">
-{% csrf_token %}
-
-<div class="form-group">  
-            <label for="{{ form.username}}">Username </label>
-            <div>{{ form.username}</div>
-<div>
-<div class="form-group">  
-            <label for="{{ form.password}}">Password </label>
-            <div>{{ form.password}</div>
-<div>
-
-<div>
-  <input type="submit" value="login" />
-  <input type="hidden" name="next" value="" />
-</div>
-</form>
-
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-
-{% endblock %}
+                  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
             </div>
             
           </div>
