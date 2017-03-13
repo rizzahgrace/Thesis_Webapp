@@ -7,3 +7,5 @@ thesis/webapp/static/admin/*
 thesis/webapp/static/chartit/*
 gm/*
 _MACOSX/*
+thesis/thesis/__pycache__/*
+*.pyc

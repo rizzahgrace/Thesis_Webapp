@@ -1,10 +1,12 @@
 import datetime
+from datetime import date
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.db.models import Case, Value, When
 from .models import RawData_Weather, RawData_AMPS, Owner
 from django.contrib.auth.models import User
 from webapp.forms import UploadCSVFile, recordOwner, recordUser
@@ -15,6 +17,7 @@ from chartit import DataPool, Chart
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from webapp.serializers import DataSerializer
+
 
 from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView, HighChartsSpeedometerView, HighChartsHeatMapView, HighChartsPolarView, HighChartsStockView)
 # Create your views here.
@@ -81,6 +84,10 @@ def register(request):
 
 	return render(request, 'webapp/register.html', {'userdata_form': userdata_form, 'user_form' : user_form})
 
+def test_display(request):
+	processed_data = RawData_AMPS.objects.filter(AMPS_user=self.request.user).aggregate(Avg('load'))
+	return render(request, 'webapp/test.html', processed_data)
+
 class AdvancedGraph(HighChartsMultiAxesView):
 	title = 'Example Data Chart'
 	subtitle = ''
@@ -138,8 +145,6 @@ class AdvancedGraph(HighChartsMultiAxesView):
 		data = super(AdvancedGraph, self).get_data()
 		return data
 
-# int(time.mktime(unit.timestamp.timetuple())*1000)
-
 class PowerGraph(HighChartsMultiAxesView):
 	title = 'Power'
 	subtitle = ''
@@ -154,12 +159,10 @@ class PowerGraph(HighChartsMultiAxesView):
 	}
 
 	def get_data(self):
-		#include here the user authentication
-		# user = request.user
-		# owner = user
+		owner = Owner.objects.get(AMPS_user = self.request.user)
 		data = {'id': [], 'load': [], 'SP_volt':[], 'timestamp':[]}
-		# f = RawData_AMPS.objects.filter(owner = owner)
-		f = RawData_AMPS.objects.all()
+		f = RawData_AMPS.objects.filter(owner = owner)
+		# f = RawData_AMPS.objects.all()
 		for unit in f:
 			data['id'].append(unit.id)
 			data['timestamp'].append(unit.timestamp.strftime('%I:%M'))
