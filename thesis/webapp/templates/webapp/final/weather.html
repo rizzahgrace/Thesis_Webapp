@@ -10,25 +10,20 @@
 
   <!-- CSS  -->
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href={% static 'webapp/css/materialize.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href={% static 'webapp/css/style.css' %}type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans|Roboto+Condensed|Oswald" rel="stylesheet">
-  <link href="css/my.css" type="text/css" rel="stylesheet" media="screen,projection"/>
- <script  src = "script.js"></script>
+  <link href={% static 'webapp/css/my.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
+ <script  src = {% static 'webapp/css/script.js' %}></script>
  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
-<script src="dist/scrollissimo.min.js"></script>
-  <script src='prefixfree.min.js'></script>
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-<script src = "jquery.scrollme.js"></script>
-  <link rel="stylesheet" href="style.css" media="screen">
-      <link rel="stylesheet" href="/css/font-awesome.min.css">
+<script src = {% static 'webapp/css/jquery.scrollme.js' %}></script>
+<link rel="stylesheet" href={% static 'webapp/css/font-awesome.min.css' %}>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="js/jquery.scrollme.js"></script>
-  <link rel="stylesheet" href="css/animate.min.css">
-  <link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<link href={% static 'webapp/css/animate.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
@@ -36,131 +31,20 @@
 
 <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
 <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
-      <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-            <link href="css/font-awesome.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-            
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
-   <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-    <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
-
-
-
-    <!-- amCharts javascript code -->
+<link href={% static 'webapp/css/font-awesome.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
+<!-- for the graph -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script type="text/javascript">
-      AmCharts.makeChart("chartdiv",
-        {
-          "type": "serial",
-          "categoryField": "date",
-          "dataDateFormat": "YYYY-MM-DD HH",
-          "categoryAxis": {
-            "minPeriod": "hh",
-            "parseDates": true
-          },
-          "chartCursor": {
-            "enabled": true,
-            "categoryBalloonDateFormat": "JJ:NN"
-          },
-          "chartScrollbar": {
-            "enabled": true
-          },
-          "trendLines": [],
-          "graphs": [
-            {
-              "id": "AmGraph-4",
-              "tabIndex": 2,
-              "title": "Temperature(Celsius)",
-              "valueField": "Temperature (Celsius)"
-            },
-            {
-              "id": "AmGraph-5",
-              "title": "Rainfall (mm/h)",
-              "valueField": "Rainfall (mm/hour)"
-            },
-            {
-              "id": "AmGraph-6",
-              "title": "Wind Speed (kph)",
-              "valueField": "Wind Speed (KPH)"
-            },
-            {
-              "id": "AmGraph-7",
-              "title": "Humidity (%)",
-              "valueField": "Humidity (%)"
-            }
-          ],
-          "guides": [],
-          "valueAxes": [
-            {
-              "id": "ValueAxis-1",
-              "title": "="
-            }
-          ],
-          "allLabels": [],
-          "balloon": {},
-          "legend": {
-            "enabled": true,
-            "useGraphSettings": true
-          },
-          "titles": [
-            {
-              "id": "Title-1",
-              "size": 15,
-              "text": " "
-            }
-          ],
-          "dataProvider": [
-            {
-              "date": "2014-03-01 08",
-              "Temperature (Celsius)": "29.5",
-              "Rainfall (mm/hour)": "0",
-              "Wind Speed (KPH)": 7,
-              "Humidity (%)": 51
-            },
-            {
-              "date": "2014-03-01 09",
-              "Temperature (Celsius)": "29.4",
-              "Rainfall (mm/hour)": "0",
-              "Wind Speed (KPH)": 8,
-              "Humidity (%)": 26
-            },
-            {
-              "date": "2014-03-01 10",
-              "Temperature (Celsius)": "29.2",
-              "Rainfall (mm/hour)": "0.10",
-              "Wind Speed (KPH)": 10,
-              "Humidity (%)": 43
-            },
-            {
-              "date": "2014-03-01 11",
-              "Temperature (Celsius)": "29.5",
-              "Rainfall (mm/hour)": "0.15",
-              "Wind Speed (KPH)": 10,
-              "Humidity (%)": 35
-            },
-            {
-              "date": "2014-03-01 12",
-              "Temperature (Celsius)": "29.6",
-              "Rainfall (mm/hour)": "0.25",
-              "Wind Speed (KPH)": 10,
-              "Humidity (%)": 42
-            },
-            {
-              "date": "2014-03-01 13",
-              "Temperature (Celsius)": "29.8",
-              "Rainfall (mm/hour)": "1",
-              "Wind Speed (KPH)": 7,
-              "Humidity (%)": 44
-            },
-            {
-              "date": "2014-03-01 14",
-              "Temperature (Celsius)": 30,
-              "Rainfall (mm/hour)": "1.5",
-              "Wind Speed (KPH)": 9,
-              "Humidity (%)": 35
-            }
-          ]
-        }
-      );
+    (function ($) {
+        $.getJSON("{% url 'webapp:dbbar' %}", function(data) {
+        $('#chart_container').highcharts(data);
+        });
+    })(jQuery);
     </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 <body bgcolor = "#eeeeee">
@@ -169,7 +53,7 @@
   <div class = "navbar-fixed">
   <nav class=" light-blue darken-4" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="mainSolarStyle.html" class="brand-logo left">
+      <a id="logo-container" href="home.html" class="brand-logo left">
       
       <!--<span class = "white-text thin condensed-light "> -->
       <font face = "PT Sans Narrow">
@@ -183,7 +67,7 @@
       </ul>
       <ul class="right hide-on-med-and-down">
         <li>
-          <a href="index.html">
+          <a href="home.html">
 
               <script type="text/javascript">
                 
@@ -219,7 +103,7 @@
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
-        <li><a href="#"><img src="sol0.png"></a></li>
+        <li><a href="#"><img src={% static 'webapp/images/sol0.png' %}></a></li>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
@@ -242,7 +126,7 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
     </div>
     <div class = "col s6">
     <center>
-    <img src = "temp.png" class = "responsive-img animated zoomIn">
+    <img src = {% static 'webapp/images/temp.png' %} class = "responsive-img animated zoomIn">
     </center>
     </div>
       
@@ -329,7 +213,7 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
        <div class="col s12">
       <div class = "card white animated slideInUp">
           <div class = "card-content gray-text">
-             <div id="chartdiv" style="width: 100%; height: 400px;" ></div>      
+             <div id="chart_container" style="width: 100%; height: 400px;" ></div>      
           </div>
         </div>
       </div>
@@ -343,7 +227,7 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
 <div class = "col s12 m3 l3">
        <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="rain.png">
+      <img class="activator" src={% static 'webapp/images/rain.png' %}>
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4"><center>Rainfall<i class="material-icons right">more_vert</i></center></span>
@@ -388,7 +272,7 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
 <div class = "col s12  m3 l3">
        <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="trophy.png">
+      <img class="activator" src={% static 'webapp/images/trophy.png' %}>
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4"><center>Irradiance<i class="material-icons right">more_vert</i></center></span>
@@ -403,7 +287,7 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
 <div class = "col s12 m3 l3">
        <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="rain.png">
+      <img class="activator" src={% static 'webapp/images/rain.png' %}>
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4"><center>Rainfall<i class="material-icons right">more_vert</i></center></span>
@@ -418,7 +302,7 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
 <div class = "col s12  m3 l3">
        <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="windmill.png">
+      <img class="activator" src={% static 'webapp/images/windmill.png' %}>
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4"><center>Wind Speed<i class="material-icons right">more_vert</i></center></span>
@@ -433,7 +317,7 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
 <div class = "col s12  m3 l3">
        <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="money-bag.png">
+      <img class="activator" src={% static 'webapp/images/money-bag.png' %}>
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4"><center>Temperature<i class="material-icons right">more_vert</i></center></span>
@@ -448,7 +332,7 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
 <div class = "col s12  m3 l3">
        <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="trophy.png">
+      <img class="activator" src={% static 'webapp/images/trophy.png' %}>
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4"><center>Irradiance<i class="material-icons right">more_vert</i></center></span>
@@ -552,8 +436,8 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
        $('.slider').slider({full_width: true});
    });
 </script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
+  <script src={% static 'webapp/images/css/materialize.js' %}>></script>
+  <script src={% static 'webapp/images/css/init.js' %}></script>
 
   </body>
 </html>

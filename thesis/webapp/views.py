@@ -43,7 +43,7 @@ def index(request):
 	return render(request, 'webapp/final/home.html')
 
 def weather(request):
-	return render(request, 'webapp/weather.html')
+	return render(request, 'webapp/final/weather.html')
 
 def power(request):
 	return render(request, 'webapp/power.html')
@@ -82,7 +82,7 @@ def register(request):
 		userdata_form = recordOwner()
 		user_form = recordUser()
 
-	return render(request, 'webapp/register.html', {'userdata_form': userdata_form, 'user_form' : user_form})
+	return render(request, 'webapp/final/register.html', {'userdata_form': userdata_form, 'user_form' : user_form})
 
 def test_display(request):
 	processed_data = RawData_AMPS.objects.filter(AMPS_user=self.request.user).aggregate(Avg('load'))

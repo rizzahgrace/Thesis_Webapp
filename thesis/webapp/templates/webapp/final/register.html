@@ -130,47 +130,37 @@
                        <font face = "Oswald">
                       <center> <h4>The first step towards your future begins here. Register now!</h4></center></font>
                       <center>
-                        <form class="col s12">
-                        
-                          <div class="row">
-                            <div class="input-field col s6">
-                              <input id="first_name" type="text" class="validate">
-                              <label for="first_name">First Name</label>
-                            </div>
-                            <div class="input-field col s6">
-                              <input id="last_name" type="text" class="validate">
-                              <label for="last_name">Last Name</label>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="input-field col s12">
-                              <input id="city" type="text" class="validate">
-                              <label for="city">City</label>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="input-field col s12">
-                              <input id="username" type="text" class="validate">
-                              <label for="username">Username</label>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="input-field col s12">
-                              <input id="password" type="password" class="validate">
-                              <label for="password">Password</label>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="input-field col s12">
-                              <input id="email" type="email" class="validate">
-                              <label for="email">Email</label>
-                            </div>
-                          </div>
-                         
-
-                          <a class="waves-effect waves-light light-blue darken-3 btn" href = "mainSolarStyle.html">Submit</a>
-                           </center>
-                        </form>
+                        <form method="POST">
+                {% csrf_token %}
+            <div class="form-group">  
+            <label for="{{ userdata_form.last_name.id_for_label }}">Last Name: </label>
+            <div>{{ userdata_form.last_name }}</div>
+          </div>
+            <div class="form-group">  
+            <label for="{{ userdata_form.first_name.id_for_label }}">First Name: </label>
+            <div>{{ userdata_form.first_name }}</div>
+          </div>
+            <div class="form-group">  
+            <label for="{{ userdata_form.address.id_for_label }}"> Address:</label>
+            <div>{{ userdata_form.address }}</div>
+          </div>
+          <div class="form-group">  
+            <label for="{{ user_form.username.id_for_label }}"> Username:</label>
+            <div>{{ user_form.username }}</div>
+          </div>
+          <div class="form-group">  
+            <label for="{{ user_form.password1.id_for_label }}"> Password:</label>
+            <div>{{ user_form.password1 }}</div>
+          </div><div class="form-group">  
+            <label for="{{ user_form.password2.id_for_label }}"> Password Again:</label>
+            <div>{{ user_form.password2 }}</div>
+          </div>
+          <div class="form-group">  
+            <label for="{{ user_form.email.id_for_label }}"> Email:</label>
+            <div>{{ user_form.email }}</div>
+          </div>
+          <button type="submit" class="save btn btn-default">Save</button>
+          </form>
                       </div>
       </div>
       </div>
