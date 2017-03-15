@@ -1,0 +1,544 @@
+{% load static %}
+<!DOCTYPE html>
+<!---THIS ONE-->
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Solar Power Management</title>
+
+  <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href={% static 'webapp/css/materialize.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href={% static 'webapp/css/style.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans|Roboto+Condensed|Oswald" rel="stylesheet">
+    <link href={% static 'webapp/css/my.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
+   <script  src = {% static 'webapp/css/script.js' %}></script>
+   <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+  <script src = {% static 'webapp/css/jquery.scrollme.js' %}></script>
+    <link rel="stylesheet" href={% static 'webapp/css/style.css' %} media="screen">
+    <link rel="stylesheet" href= {% static 'webapp/css/font-awesome.min.css' %}>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href={% static 'webapp/css/animate.css' %} rel="stylesheet" media="screen,projection"/>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+  <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+
+  <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+              <link href={% static 'webapp/css/font-awesome.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
+
+</head>
+<body bgcolor = "#eeeeee">
+
+   
+  <div class = "navbar-fixed">
+  <nav class=" light-blue darken-4" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="home.html" class="brand-logo left">
+      
+      <!--<span class = "white-text thin condensed-light "> -->
+      <font face = "PT Sans Narrow">
+      Analytics Monitoring for Power Systems</a></span></font>
+      <ul class="left hide-on-med-and-down">
+        <li>
+        <!--
+          <a href="index.html"><img class = "responsive-img" src="nl2.png" width = "50" height = "50"></a>
+          -->
+          </li>
+      </ul>
+      <ul class="right hide-on-med-and-down">
+        <li>
+          <a href="home.html">
+
+              <script type="text/javascript">
+                
+                tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+
+                function GetClock(){
+                var d=new Date();
+                var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getYear();
+                if(nyear<1000) nyear+=1900;
+                var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds(),ap;
+
+                if(nhour==0){ap=" AM";nhour=12;}
+                else if(nhour<12){ap=" AM";}
+                else if(nhour==12){ap=" PM";}
+                else if(nhour>12){ap=" PM";nhour-=12;}
+
+                if(nmin<=9) nmin="0"+nmin;
+                if(nsec<=9) nsec="0"+nsec;
+
+                document.getElementById('clockbox').innerHTML=""+tmonth[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
+                }
+
+                window.onload=function(){
+                GetClock();
+                setInterval(GetClock,1000);
+                }
+                </script>
+                <font face = "Open Sans">
+                <div id="clockbox"></div></font>
+
+
+          </a>
+          </li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        
+    </div>
+  </nav>
+  </div>
+
+
+
+
+
+<div class = "row">
+  <div class = "col s12 animated slideInDown ">
+  <center>
+  <img src={% static 'webapp/images/newsliderwithword.png' %} alt="" class="responsive-img">
+  </center>
+  </div>
+
+  <div class = "col s12">
+  <center>
+  
+  </center>
+  </div>
+
+              
+
+  <div class="container">
+  <div class ="col s12 animated slideInLeft ">
+  
+  <h2 >
+  <font face = "Roboto Condensed">
+  
+There's a giant power plant in the sky.
+  <br>
+Make use of it.
+  </font>
+  </h2>
+  </div>
+  <div class = "col s6">
+  <font face = "Open Sans">
+  <br>
+  <br>
+  <br>
+  <h5>
+  Help us help you.
+  <br>
+  AMPS provides the ideal solar management solutions
+  <br>
+  for your home.
+  </font>
+  </h5>
+  </div>
+  <div class = "col s6">
+  <img src = {% static 'webapp/images/icon1.png' %} class = "responsive-img">
+    </div>
+    
+    <br>
+  
+</div>
+
+<div class = "col s12">
+  <center>
+  <br>
+  <img src={% static 'webapp/images/slider2.png' %} alt="" class="responsive-img">
+  
+  <br>
+  </center>
+  </div>
+ 
+<div class="container">
+ <div class = "col s6">
+ <center>
+
+<br>
+<br>
+  <img src = {% static 'webapp/images/sidepic.png' %} class = "responsive-img">
+  </center>
+    </div>
+    
+  <div class = "col s6">
+  <font face = "Open Sans" size= "4.5">
+  <br>
+  <br>
+  <br>
+  <br>
+  Using solar power could cut your electric bill by 99%.
+  <br>
+  Wowee right? That's a lot of extra money.
+  <br>
+We was the savings on to you
+  <br>
+because you deserve only the best.  <br>
+  </font>
+  
+  </div>
+ 
+    <br>
+  
+</div>
+<div class = "col s12"><br></div>
+
+
+<div class = "col s12">
+
+            <div class="slider">
+                <ul class="slides">
+                  
+                  <li>
+                    <img src={% static 'webapp/images/slider3.png' %}> <!-- random image -->
+                    <div class="caption left-align black-text">
+                      <h3>Left Aligned Caption</h3>
+                      <h5 class="light black-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                  </li>
+                  <li>
+                    <img src={% static 'webapp/images/yuppie.jpg' %}> <!-- random image -->
+                    <div class="caption right-align black-text">
+                      <h3>Right Aligned Caption</h3>
+                      <h5 class="light black-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                  </li>
+                  <li>
+                    <img src={% static 'webapp/images/slide4-2.png' %}> <!-- random image -->
+                    <div class="caption center-align black-text">
+                      <h3>This is our big Tagline!</h3>
+                      <h5 class="light black-text text-lighten-3">Here's our small slogan.</h5>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+
+</div>
+
+
+
+<div class = "col s12">
+  <center>
+ <!--  <img src="slider3.png" alt="" class="responsive-img"> -->
+  
+  </center>
+
+  <div class = "s12">
+  <div class = "container">
+        <br>
+        <h2>
+        <font face = "PT Sans Narrow">
+        <center>
+        Explore the features of AMPS now!
+        </h2>
+        </font>
+        </center>
+        </div>
+  </div>
+
+  <div class = "container">
+
+        <div class="row">
+
+
+        <div class="col s12 m4 l4">
+          <div class="card white ">
+            <div class="card-content black-text">
+            <center>
+              <br>
+            <img class = "responsive-img" src={% static 'webapp/images/spl.png' %} width="256" height="256" >
+            <br>
+              <h5>
+              <font face = "PT Sans">
+              Weather Data</h5></font>
+              </h5>
+              <font face = "Open Sans">
+              On this page weather data will be viewable. This page will show you weather data. The data presenter here will be related to weather. It should be noted that the data included in this will be about weather and atmospheric conditions. Click the button to view such data now.
+              </font>
+              <br><br>
+              
+           
+            <br>
+            <a class="waves-effect waves-light light-blue darken-3 btn" href = "NewWeather.html">
+             
+              Enter</a>
+          </center>
+            </div>
+            
+          </div>
+        </div>
+
+          <div class="col s12 m4 l4">
+          <div class="card white ">
+            <div class="card-content black-text">
+            <center>
+              <br>
+            <img class = "responsive-img" src={% static 'webapp/images/plgl.png' %} width="256" height="256" >
+            <br>
+              <h5>
+              <font face = "PT Sans">
+              Power Monitoring</h5></font>
+              </h5>
+              <font face = "Open Sans">
+              On this page weather data will be viewable. This page will show you weather data. The data presenter here will be related to weather. It should be noted that the data included in this will be about weather and atmospheric conditions. Click the button to view such data now.
+              </font>
+              <br><br>
+              
+           
+            <br>
+            <a class="waves-effect waves-light light-blue darken-3 btn" href = "link1.html">
+             
+              Enter</a>
+          </center>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="col s12 m4 l4">
+          <div class="card white ">
+            <div class="card-content black-text">
+            <center>
+              <br>
+            <img class = "responsive-img" src={% static 'webapp/images/cl.png' %} width="256" height="256" >
+            <br>
+              <h5>
+              <font face = "PT Sans">
+              FAQs</h5></font>
+              </h5>
+              <font face = "Open Sans">
+              On this page weather data will be viewable. This page will show you weather data. The data presenter here will be related to weather. It should be noted that the data included in this will be about weather and atmospheric conditions. Click the button to view such data now.
+              </font>
+              <br><br>
+              
+           
+            <br>
+            <a class="waves-effect waves-light light-blue darken-3 btn" href = "link1.html">
+             
+              Enter</a>
+          </center>
+            </div>
+            
+          </div>
+        </div>
+<div class = "col s12">
+
+</div>
+<div class = "col s12">
+  <div class = "container">
+   
+        
+        
+        <h3>
+        <font face = "PT Sans Narrow">
+        <center>
+        <br>
+  Make the best choice - join the AMPS family!  </h3>
+        </font>
+        </center>
+        </div>
+  </div>
+
+        <div class = "col s12 m6 l6">
+        <div class ="card white">
+        <div class = "card-content black-text">
+        <center>
+        <font face = "PT Sans">
+        <h5>
+        Already at the forefront? Sign in here:
+        </h5>
+        </font>
+
+          <div class="cardlight-blue lighten-4">
+            <div class="card-content black-text">
+              
+                          <div class="row">
+                <div class="input-field col s12">
+                  <input id="email" type="email" class="validate">
+                  <label for="email">Username</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <input id="password" type="password" class="validate">
+                  <label for="password">Password</label>
+                </div>
+              </div>
+              <center>
+              <a class="waves-effect waves-light light-blue darken-3 btn" href = "main.html">Log-In</a>
+            </center>
+            </div>
+            
+          </div>
+        </center>
+        </div>
+        </div>
+        </div>
+
+        <div class = "col s12 m6 l6" id="login">
+        <div class ="card white">
+        <div class = "card-content black-text">
+        <center>
+          <font face =" PT Sans">
+            <h5>
+              What benefits do registered users get?
+            </h5>       
+   </font>
+   <br>
+        <div class = "row">
+        <div class = "col s4">
+        <center>
+        <img src = {% static 'webapp/images/1.png' %} height = "50" width= "50" class = "responsive-img">
+        </center>
+        </div>
+        <div class = "col s8">
+        <center>
+          <font face = "Open Sans">
+          Let's get personal! Information displayed will be more relavant to your location.
+          </center>
+        </div>
+
+        </div>
+
+          <div class = "row">
+        <div class = "col s4">
+        <center>
+        <img src = {% static 'webapp/images/2.png' %} height = "50" width= "50" class = "responsive-img">
+        </center>
+        </div>
+        <div class = "col s8">
+        <center>
+          <font face = "Open Sans">
+          Know your worth! Predict power bill for your solar home.
+          </center>
+        </div>
+
+
+        </div>
+          <div class = "row">
+        <div class = "col s4">
+        <center>
+        <img src = {% static 'webapp/images/3.png' %} height = "50" width= "50" class = "responsive-img">
+        </center>
+        </div>
+        <div class = "col s8">
+        <center>
+          <font face = "Open Sans">
+          Digging deep! More detailed reports tailored for your personal consumption.
+          </center>
+        </div>
+
+        </div>
+
+        </center>
+
+<center>
+              <a class="waves-effect waves-orange light-blue darken-3 btn" href = "landing.html">Register</a>
+            </center>
+
+        </div>
+        </div>
+        </div>
+
+      </div>
+    
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+</div>   
+
+</div>
+   <div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large light-blue darken-3">
+      <i class="material-icons">menu</i>
+    </a>
+    <ul>
+      <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+      <li><a class="btn-floating red" href="#login">Log-in</a></li>
+      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+      <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+      <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+    </ul>
+  </div>
+
+  <footer class="page-footer light-blue darken-4">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <font size ="3"><b>Analytics Monitoring for Power Systems</b></font>
+          <p class="black-text">
+            <font size="2">
+          Solar G. Development of a Real-Time Energy Monitoring System for a Hybrid Solar Power System with Integrated Power Prediction. </font></p><p class="grey-text text-darken-4">Ateneo de Manila University.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <font size = "3">Contacts</font>
+          <ul>
+          <font size = "2">
+            <li><a class="black-text" href="mailto:julius.sambo@obf.ateneo.edu">ampsSolarEnergy@obf.ateneo.edu</a></li>
+            <li><a class="black-text" href="fb.com/solarg">fb.com/SolarG</a></li>
+            <li><a class="black-text" href="twitter.com/ateneodemanilau">@SolarGph</a></li>
+            </font>
+           
+          </ul>
+        </div>
+        
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      <a class="orange-text text-lighten-3" href="">JS2017Version2</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script>
+   $(document).ready(function () {
+       $('.slider').slider({full_width: true});
+   });
+</script>
+<script>
+  $('.carousel.carousel-slider').carousel({fullWidth: true});
+
+              
+</script>
+
+
+  <script src={% static 'js/materialize.js' %}></script>
+  <script src={% static 'js/init.js' %}></script>
+<a title="Real Time Analytics" href="http://clicky.com/101032240"><img alt="Real Time Analytics" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
+<script src="//static.getclicky.com/js" type="text/javascript"></script>
+<script type="text/javascript">try{ clicky.init(101032240); }catch(e){}</script>
+<noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101032240ns.gif" /></p></noscript>
+  </body>
+</html>

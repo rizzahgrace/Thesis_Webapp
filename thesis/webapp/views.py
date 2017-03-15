@@ -40,7 +40,7 @@ def login_user(request):
 
 
 def index(request):
-	return render(request, 'webapp/index.html')
+	return render(request, 'webapp/final/home.html')
 
 def weather(request):
 	return render(request, 'webapp/weather.html')

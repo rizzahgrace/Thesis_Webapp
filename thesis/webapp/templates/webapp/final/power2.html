@@ -1,0 +1,303 @@
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Solar Energy 
+  </title>
+
+  <!-- CSS-->
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+  <link href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+  <!-- scripts -->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  <script src="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
+</head>
+
+
+<body bgcolor = "#b9f6ca">
+  <div class = "navbar-fixed">
+  <nav class="light-blue accent-4" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo center">
+      <span class = "grey-text text-darken-3">
+      Solar Energy Monitor</a></span>
+      <ul class="left hide-on-med-and-down">
+        <li>
+          <a href="index.html"><img src="nl2.png" width = "50" height = "50"></a>
+          </li>
+      </ul>
+      <ul class="right hide-on-med-and-down">
+        <li>
+          <a href="index.html">
+              <script type="text/javascript">
+                
+                tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+
+                function GetClock(){
+                var d=new Date();
+                var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getYear();
+                if(nyear<1000) nyear+=1900;
+                var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds(),ap;
+
+                if(nhour==0){ap=" AM";nhour=12;}
+                else if(nhour<12){ap=" AM";}
+                else if(nhour==12){ap=" PM";}
+                else if(nhour>12){ap=" PM";nhour-=12;}
+
+                if(nmin<=9) nmin="0"+nmin;
+                if(nsec<=9) nsec="0"+nsec;
+
+                document.getElementById('clockbox').innerHTML=""+tmonth[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
+                }
+
+                window.onload=function(){
+                GetClock();
+                setInterval(GetClock,1000);
+                }
+                </script>
+                <div id="clockbox"></div>
+
+
+          </a>
+          </li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#"><img src="sol0.png"></a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  </div>
+
+
+<br>
+<br>
+
+<div class="container">
+  <div class="center-align">
+    <div class="col-sm-8">
+      <h3 class="left-align"><h3>April 7-8, 2016</h3>
+      <div class="ct-chart center-align"></div>
+      <div id="chartist" class="chartist" data-x-axis="DATE" data-y-axis="POWER (Watts)"></div>
+                <script>
+                  new Chartist.Bar('.ct-chart', {
+                     labels: ['Thursday,April 7, 2016',  'Friday, April 8, 2016'],
+                     series: [[118.04, 197.98],
+                              [1158.46, 182.08]
+                             ]
+
+                  }, {
+                    low: 0,
+                    showArea: true,
+                    width: 700,
+                    height: 400,
+                    chartPadding: {
+                    right: 40
+                    }
+                  }, options, responsiveOptions);
+
+                  var options = {
+                    seriesBarDistance: 10
+                  };
+
+                  var responsiveOptions = [
+                    ['screen and (max-width: 700px)', {
+                      seriesBarDistance: 5,
+                      axisX: {
+                        labelInterpolationFnc: function (value) {
+                          return value[0];
+                        }
+                      }
+                    }]
+                  ];
+
+                  new Chartist.Bar('.ct-chart', data, options, responsiveOptions);
+
+                  /*new Chartist.Line('.ct-chart', {
+                    labels: ['Thursday,April 7, 2016',  'Friday, April 8, 2016'],
+                    series: [
+                      [918.28, 1624.18],
+                      [285.3, 287.03]
+                    ]
+                  }, {
+                    low: 0,
+                    showArea: true,
+                    width: 700,
+                    height: 400,
+                    chartPadding: {
+                    right: 40
+                    }
+                    
+                  });
+*/
+              </script> 
+    </div>
+    <div class="col-sm-4">
+      <div class="row">
+          <br>
+          <br>
+          <br>
+          <br>
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">316.04 Watt-hour</span>
+              <p></p>
+            </div>
+            <div class="card-action">
+              <a href="#">PV Power Generation</a>
+            </div>
+          </div>
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">1340.54 Watt-hour</span>
+              <p></p>
+            </div>
+            <div class="card-action">
+              <a href="#">Power Consumption</a>
+            </div>
+          </div>
+        
+      </div>
+            
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="center-align">
+<br>
+    <div class="col-sm-1">
+     <h4>LEGEND</h4>
+    </div>
+    
+        <div class="col-sm-3">  
+        <img class="left-align" src="images/redbar.jpg" >
+        <h5>PV Generation</h5>
+        </div>
+    
+        <div class="col-sm-3">
+       <img class="left-align" src="images/pinkbar.jpg" >
+        <h5>Load Consumption</h5>
+    
+        </div>
+    
+        <div class="col-sm-7">
+        </div>
+</div>
+</div>
+<!-- <div class="row center-align">
+      <table class="responsive-table">
+        <thead>
+          <tr>
+              <th colspan="2" data-field="id">
+                <div class="center-align">
+                <a class="waves-effect waves-light btn-flat">NOW</a>
+                <a class="waves-effect waves-light btn-flat">DAILY</a>
+                <a class="waves-effect waves-light btn-flat">MONTHLY</a>
+                </div>
+              </th>      
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td rowspan="2">
+              <div class="ct-chart left-align"></div>
+                <script>
+                  new Chartist.Line('.ct-chart', {
+                    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                    series: [
+                      [12, 9, 7, 8, 5, 10, 2],
+                      [25, 15, 12, 7, 18, 22, 20]
+                    ]
+                  }, {
+                    low: 0,
+                    showArea: true,
+                    width: 700,
+                    height: 400,
+                    chartPadding: {
+                    right: 40
+                    }
+                    
+                  });
+
+              </script>
+            </td>
+
+            <td>
+              <div class="left-align">    
+                Generated PV Power <br>
+                90
+              </div>
+            </td>
+            <td>Power Consumption</td>
+          </tr>
+          <tr>
+            <td colspan="2">Cost so Far</td>
+          </tr>
+        </tbody>
+      </table>          
+</div>
+
+ -->
+
+<br>
+
+
+
+<br>
+
+<footer class="page-footer light-blue accent-4">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="black-text">Solar G</h5>
+          <p class="black-text">Solar G. Development of a Real-Time Energy Monitoring System for a Hybrid Solar Power System with Integrated Power Prediction. </p><p class="grey-text text-darken-4">Ateneo de Manila University.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="black-text">Contacts</h5>
+          <ul>
+            <li><a class="black-text" href="mailto:julius.sambo@obf.ateneo.edu">ampsSolarEnergy@obf.ateneo.edu</a></li>
+            <li><a class="black-text" href="fb.com/solarg">fb.com/SolarG</a></li>
+            <li><a class="black-text" href="twitter.com/ateneodemanilau">@SolarGph</a></li>
+           
+          </ul>
+        </div>
+        
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      <a class="orange-text text-lighten-3" href="http://materializecss.com">JS2017V2</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!---THIS ONE-->
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Solar Power Management</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans|Roboto+Condensed|Oswald" rel="stylesheet">
+  <link href="css/my.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+ <script  src = "script.js"></script>
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
+<script src="dist/scrollissimo.min.js"></script>
+  <script src='prefixfree.min.js'></script>
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<script src = "jquery.scrollme.js"></script>
+  <link rel="stylesheet" href="style.css" media="screen">
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="js/jquery.scrollme.js"></script>
+  <link rel="stylesheet" href="css/animate.min.css">
+  <link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+<script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+
+<link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+
+</head>
+<body bgcolor = "#eeeeee">
+
+   
+  <div class = "navbar-fixed">
+  <nav class=" light-blue darken-4" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="mainSolarStyle.html" class="brand-logo left">
+      
+      <!--<span class = "white-text thin condensed-light "> -->
+      <font face = "PT Sans Narrow">
+      Analytics Monitoring for Power Systems</a></span></font>
+      <ul class="left hide-on-med-and-down">
+        <li>
+        <!--
+          <a href="index.html"><img class = "responsive-img" src="nl2.png" width = "50" height = "50"></a>
+          -->
+          </li>
+      </ul>
+      <ul class="right hide-on-med-and-down">
+        <li>
+          <a href="index.html">
+
+              <script type="text/javascript">s
+                
+                tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+
+                function GetClock(){
+                var d=new Date();
+                var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getYear();
+                if(nyear<1000) nyear+=1900;
+                var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds(),ap;
+
+                if(nhour==0){ap=" AM";nhour=12;}
+                else if(nhour<12){ap=" AM";}
+                else if(nhour==12){ap=" PM";}
+                else if(nhour>12){ap=" PM";nhour-=12;}
+
+                if(nmin<=9) nmin="0"+nmin;
+                if(nsec<=9) nsec="0"+nsec;
+
+                document.getElementById('clockbox').innerHTML=""+tmonth[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
+                }
+
+                window.onload=function(){
+                GetClock();
+                setInterval(GetClock,1000);
+                }
+                </script>
+                <div id="clockbox"></div>
+
+
+          </a>
+          </li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#"><img class = "responsive-img"  src="sol0.png"></a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  </div>
+<div class = "container">
+   <div class="row">
+
+      
+      <div class = "col s12"><br></div>
+      <div class = "col s12">
+     
+        
+      </div>
+      <div class = "col s6">
+      <center>
+      <img class = "responsive-img animated slideInLeft" width = "400" height="195" src="Landing.png"  >
+       </center>
+        <br></div>
+        <div class = "col s6">
+        <font face = "Oswald" class="black-text thin condensed-light">
+        <center>
+        <h4 class = "animated slideInRight"> Bright lights. <br>Bright homes. <br> Bright futures. <br>  <font color="ff5e1e"><div class = "animated  pulse">
+         Keep shining with
+         solar.
+      </div>
+        </font>
+        </h4>
+        </center>
+        </font>
+        </div>
+        <div class = "col s12">
+      <div class = "card white animated slideInUp">
+      <div class = "card-content black-text">
+      
+                       <div class="row">
+                       <font face = "Oswald">
+                      <center> <h4>The first step towards your future begins here. Register now!</h4></center></font>
+                      <center>
+                        <form class="col s12">
+                        
+                          <div class="row">
+                            <div class="input-field col s6">
+                              <input id="first_name" type="text" class="validate">
+                              <label for="first_name">First Name</label>
+                            </div>
+                            <div class="input-field col s6">
+                              <input id="last_name" type="text" class="validate">
+                              <label for="last_name">Last Name</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="city" type="text" class="validate">
+                              <label for="city">City</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="username" type="text" class="validate">
+                              <label for="username">Username</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="password" type="password" class="validate">
+                              <label for="password">Password</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="email" type="email" class="validate">
+                              <label for="email">Email</label>
+                            </div>
+                          </div>
+                         
+
+                          <a class="waves-effect waves-light light-blue darken-3 btn" href = "mainSolarStyle.html">Submit</a>
+                           </center>
+                        </form>
+                      </div>
+      </div>
+      </div>
+        
+      </div>
+        <div class = "col s4">
+        </div>
+       
+   <div class = "col s4">
+        </div>
+ 
+  </div>
+        </div>
+      <div class = "col s12"><br>
+
+           <center>
+
+                    
+        </center>
+
+
+
+          </div>
+<br>
+<br>
+
+
+</div>   
+
+ <footer class="page-footer light-blue darken-4">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <font size ="3"><b>Analytics Monitoring for Power Systems</b></font>
+          <p class="black-text">
+            <font size="2">
+          Solar G. Development of a Real-Time Energy Monitoring System for a Hybrid Solar Power System with Integrated Power Prediction. </font></p><p class="grey-text text-darken-4">Ateneo de Manila University.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <font size = "3">Contacts</font>
+          <ul>
+          <font size = "2">
+            <li><a class="black-text" href="mailto:julius.sambo@obf.ateneo.edu">ampsSolarEnergy@obf.ateneo.edu</a></li>
+            <li><a class="black-text" href="fb.com/solarg">fb.com/SolarG</a></li>
+            <li><a class="black-text" href="twitter.com/ateneodemanilau">@SolarGph</a></li>
+            </font>
+           
+          </ul>
+        </div>
+        
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      <a class="orange-text text-lighten-3" href="">JS2017Version2</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+
+  <!--  Scripts-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script>
+   $(document).ready(function () {
+       $('.slider').slider({full_width: true});
+   });
+    
+</script>
+<script>
+     $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
+         
+</script>
+
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
+</html>
