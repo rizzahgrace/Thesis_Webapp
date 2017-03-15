@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<!---THIS ONE-->
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Solar Energy Guide</title>
+
+  <!-- CSS  -->
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans|Roboto+Condensed|Oswald" rel="stylesheet">
+  <link href="css/my.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+ <script  src = "script.js"></script>
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
+<script src="dist/scrollissimo.min.js"></script>
+  <script src='prefixfree.min.js'></script>
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<script src = "jquery.scrollme.js"></script>
+  <link rel="stylesheet" href="style.css" media="screen">
+      <link rel="stylesheet" href="/css/font-awesome.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="js/jquery.scrollme.js"></script>
+  <link rel="stylesheet" href="css/animate.min.css">
+  <link href="css/animate.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+<script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+
+<link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+      <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+            <link href="css/font-awesome.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+            
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+   <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+
+
+
+    <!-- amCharts javascript code -->
+    <script type="text/javascript">
+      AmCharts.makeChart("chartdiv",
+        {
+          "type": "serial",
+          "categoryField": "date",
+          "dataDateFormat": "YYYY-MM-DD HH",
+          "categoryAxis": {
+            "minPeriod": "hh",
+            "parseDates": true
+          },
+          "chartCursor": {
+            "enabled": true,
+            "categoryBalloonDateFormat": "JJ:NN"
+          },
+          "chartScrollbar": {
+            "enabled": true
+          },
+          "trendLines": [],
+          "graphs": [
+            {
+              "id": "AmGraph-4",
+              "tabIndex": 2,
+              "title": "Temperature(Celsius)",
+              "valueField": "Temperature (Celsius)"
+            },
+            {
+              "id": "AmGraph-5",
+              "title": "Rainfall (mm/h)",
+              "valueField": "Rainfall (mm/hour)"
+            },
+            {
+              "id": "AmGraph-6",
+              "title": "Wind Speed (kph)",
+              "valueField": "Wind Speed (KPH)"
+            },
+            {
+              "id": "AmGraph-7",
+              "title": "Humidity (%)",
+              "valueField": "Humidity (%)"
+            }
+          ],
+          "guides": [],
+          "valueAxes": [
+            {
+              "id": "ValueAxis-1",
+              "title": "="
+            }
+          ],
+          "allLabels": [],
+          "balloon": {},
+          "legend": {
+            "enabled": true,
+            "useGraphSettings": true
+          },
+          "titles": [
+            {
+              "id": "Title-1",
+              "size": 15,
+              "text": " "
+            }
+          ],
+          "dataProvider": [
+            {
+              "date": "2014-03-01 08",
+              "Temperature (Celsius)": "29.5",
+              "Rainfall (mm/hour)": "0",
+              "Wind Speed (KPH)": 7,
+              "Humidity (%)": 51
+            },
+            {
+              "date": "2014-03-01 09",
+              "Temperature (Celsius)": "29.4",
+              "Rainfall (mm/hour)": "0",
+              "Wind Speed (KPH)": 8,
+              "Humidity (%)": 26
+            },
+            {
+              "date": "2014-03-01 10",
+              "Temperature (Celsius)": "29.2",
+              "Rainfall (mm/hour)": "0.10",
+              "Wind Speed (KPH)": 10,
+              "Humidity (%)": 43
+            },
+            {
+              "date": "2014-03-01 11",
+              "Temperature (Celsius)": "29.5",
+              "Rainfall (mm/hour)": "0.15",
+              "Wind Speed (KPH)": 10,
+              "Humidity (%)": 35
+            },
+            {
+              "date": "2014-03-01 12",
+              "Temperature (Celsius)": "29.6",
+              "Rainfall (mm/hour)": "0.25",
+              "Wind Speed (KPH)": 10,
+              "Humidity (%)": 42
+            },
+            {
+              "date": "2014-03-01 13",
+              "Temperature (Celsius)": "29.8",
+              "Rainfall (mm/hour)": "1",
+              "Wind Speed (KPH)": 7,
+              "Humidity (%)": 44
+            },
+            {
+              "date": "2014-03-01 14",
+              "Temperature (Celsius)": 30,
+              "Rainfall (mm/hour)": "1.5",
+              "Wind Speed (KPH)": 9,
+              "Humidity (%)": 35
+            }
+          ]
+        }
+      );
+    </script>
+
+</head>
+<body bgcolor = "#eeeeee">
+
+   
+  <div class = "navbar-fixed">
+  <nav class=" light-blue darken-4" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="mainSolarStyle.html" class="brand-logo left">
+      
+      <!--<span class = "white-text thin condensed-light "> -->
+      <font face = "PT Sans Narrow">
+      Analytics Monitoring for Power Systems</a></span></font>
+      <ul class="left hide-on-med-and-down">
+        <li>
+        <!--
+          <a href="index.html"><img class = "responsive-img" src="nl2.png" width = "50" height = "50"></a>
+          -->
+          </li>
+      </ul>
+      <ul class="right hide-on-med-and-down">
+        <li>
+          <a href="index.html">
+
+              <script type="text/javascript">
+                
+                tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
+
+                function GetClock(){
+                var d=new Date();
+                var nday=d.getDay(),nmonth=d.getMonth(),ndate=d.getDate(),nyear=d.getYear();
+                if(nyear<1000) nyear+=1900;
+                var nhour=d.getHours(),nmin=d.getMinutes(),nsec=d.getSeconds(),ap;
+
+                if(nhour==0){ap=" AM";nhour=12;}
+                else if(nhour<12){ap=" AM";}
+                else if(nhour==12){ap=" PM";}
+                else if(nhour>12){ap=" PM";nhour-=12;}
+
+                if(nmin<=9) nmin="0"+nmin;
+                if(nsec<=9) nsec="0"+nsec;
+
+                document.getElementById('clockbox').innerHTML=""+tmonth[nmonth]+" "+ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
+                }
+
+                window.onload=function(){
+                GetClock();
+                setInterval(GetClock,1000);
+                }
+                </script>
+                <div id="clockbox"></div>
+
+
+          </a>
+          </li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#"><img src="sol0.png"></a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+  </div>
+<div class = "container">
+   <div class="row">
+   <div class = "col s12"> <br><br> </div>
+    <div class = "col s6 animated zoomIn ">
+    <font face= "PT Sans">
+    <center>
+    <br>
+    <br>
+    <h4>
+    The Weather Station - Faura Hall </h4>
+<br>
+The Weather Station is a something something located in Faura Hall, Ateneo de manila University.
+It can measure rainfall, humidity, wind speed, wind direction, and solar irradiance.
+    </center>
+    </div>
+    <div class = "col s6">
+    <center>
+    <img src = "temp.png" class = "responsive-img animated zoomIn">
+    </center>
+    </div>
+      
+    <!--   <div class = "col s12"><br></div>
+      <font face = "PT Sans">
+      <center>
+        <H3>
+          Weather Station - Faura Hall
+        </H3>
+      </center>
+      </font>
+      </div> -->
+      <div class = "col s12">
+      <br>
+      </div>
+      <div class =" col s12 m3 l3">
+      <div class ="card white animated slideInUp">
+        <div class = "card-content black-text">
+        <center>
+      <i class="fa fa-thermometer-0 icon-lbd4 fa-5x">
+        
+      </i>
+      <font face = "Open Sans" size="15">
+        
+        26°
+        </font>
+      <br>
+       Temperature
+      </center>
+        </div>
+        </div>
+      </div>
+      <div class = "col s12 m3 l3">
+      <div class ="card white animated slideInUp">
+        <div class = "card-content black-text">
+        <center>
+      <i class="fa fa-tint icon-lbd4 fa-5x">
+        
+      </i>
+      <font face = "Open Sans" size="15">
+        
+        2mm
+        
+        </font>
+      <br>
+       Rain Fall
+      </center>
+        </div>
+        </div>
+      </div>
+      <div class = "col s12 m3 l3">
+      <div class ="card white animated slideInUp">
+        <div class = "card-content black-text">
+        <center>
+      <i class="fa fa-arrow-left fa-spin icon-lbd4 fa-5x">
+        
+      </i>
+      <font face = "Open Sans" size="10">
+        18k
+        </font>
+      <br>
+       Wind Speed
+      </center>
+        </div>
+        </div>
+      </div>
+
+      <div class = "col s12 m3 l3">
+      <div class ="card white animated slideInUp">
+        <div class = "card-content black-text">
+        <center>
+      <i class="fa fa-shower icon-lbd4 fa-5x">
+        
+      </i>
+      <font face = "Open Sans" size="12">
+        52%
+        </font>
+      <br>
+       Humidity
+      </center>
+        </div>
+        </div>
+      </div>
+       <div class="col s12">
+      <div class = "card white animated slideInUp">
+          <div class = "card-content gray-text">
+             <div id="chartdiv" style="width: 100%; height: 400px;" ></div>      
+          </div>
+        </div>
+      </div>
+<div class = "col s12">
+<center>
+<font face = "PT Sans">
+<h4> <i>How weather affects solar output:</i></h4>
+</font>
+</center>
+</div>
+<div class = "col s12 m3 l3">
+       <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="rain.png">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4"><center>Rainfall<i class="material-icons right">more_vert</i></center></span>
+      
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Raindall<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
+</div>
+<div class = "col s12  m3 l3">
+       <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="windmill.png">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4"><center>Wind Speed<i class="material-icons right">more_vert</i></center></span>
+      
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Wind Speed<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
+</div>
+<div class = "col s12  m3 l3">
+       <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="money-bag.png">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4"><center>Temperature<i class="material-icons right">more_vert</i></center></span>
+     
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Temperature<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
+</div>
+<div class = "col s12  m3 l3">
+       <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="trophy.png">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4"><center>Irradiance<i class="material-icons right">more_vert</i></center></span>
+   
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
+</div>
+<div class = "col s12 m3 l3">
+       <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="rain.png">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4"><center>Rainfall<i class="material-icons right">more_vert</i></center></span>
+      
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Raindall<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
+</div>
+<div class = "col s12  m3 l3">
+       <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="windmill.png">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4"><center>Wind Speed<i class="material-icons right">more_vert</i></center></span>
+      
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Wind Speed<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
+</div>
+<div class = "col s12  m3 l3">
+       <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="money-bag.png">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4"><center>Temperature<i class="material-icons right">more_vert</i></center></span>
+     
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Temperature<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
+</div>
+<div class = "col s12  m3 l3">
+       <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="trophy.png">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4"><center>Irradiance<i class="material-icons right">more_vert</i></center></span>
+   
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
+</div>
+<!--
+      <div class="col s12">
+      <div class = "card green accent-2">
+          <div class = "card-content gray-text">
+            <center><h4>About the Weather Station</h4></center>
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+          </div>
+        </div>
+      </div>
+    -->
+   
+   <!--  <div class="row">
+      <div class="col s7 push-s5">
+          <div class = "card  white">
+          <div class = "card-content gray-text">
+        <center><h5>About the Weather Station</h5></center> <br>
+            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using.</p>
+        </div>
+      </div>
+    </div>
+
+      <div class="col s5 pull-s7"><span class="flow-text">
+        <div class = " card white">
+          <div class = "card-content gray-text">
+            <center>
+        <img src="ws.png" alt="" class="circle responsive-img" width = "256" height = "256"></span></center></div>
+      </div> 
+    </div>
+    </div>
+ -->
+      <div class="col s12">
+      <div class = "card white">
+          <div class = "card-content gray-text">
+          <center>
+          <h5> Meteo.com Weather Data and Forecast Comparison</h5>
+          <iframe src="https://www.meteoblue.com/en/weather/widget/three/quezon-city_philippines_1692192?geoloc=fixed&nocurrent=0&noforecast=0&days=7&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=monochrome"  frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups" style="width: 805px;height: 622px"></iframe><div>
+          </center>
+          </div>
+          </div>
+          </div>
+     
+         
+                
+        
+         
+          </div>
+        </div>
+      </div>
+
+
+
+
+</div>   
+</div>
+ 
+
+  <footer class="page-footer light-blue darken-4">
+        <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="black-text">Solar G</h5>
+          <p class="black-text">Solar G. Development of a Real-Time Energy Monitoring System for a Hybrid Solar Power System with Integrated Power Prediction. </p><p class="grey-text text-darken-4">Ateneo de Manila University.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="black-text">Contacts</h5>
+          <ul>
+            <li><a class="black-text" href="mailto:julius.sambo@obf.ateneo.edu">ampsSolarEnergy@obf.ateneo.edu</a></li>
+            <li><a class="black-text" href="fb.com/solarg">fb.com/SolarG</a></li>
+            <li><a class="black-text" href="twitter.com/ateneodemanilau">@SolarGph</a></li>
+           
+          </ul>
+        </div>
+        
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      <a class="orange-text text-lighten-3" href="http://materializecss.com">JS2017V2</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script>
+   $(document).ready(function () {
+       $('.slider').slider({full_width: true});
+   });
+</script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
+</html>
