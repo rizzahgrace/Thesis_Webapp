@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^register', views.register, name='register'),
     url(r'^index', auth_views.login, {'template_name': 'webapp/final/home.html'}, name='login'),
     url(r'^home', views.home, name='home'),
+    url(r'^home3', views.home3, name='home3'),
     url(r'^csv', views.csv, name='csv'),
     url(r'^test', views.test_display, name='test'),
     url(r'^weather', views.weather, name='weather'),
