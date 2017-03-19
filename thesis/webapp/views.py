@@ -54,9 +54,8 @@ def index(request):
 def home(request):
 	return render(request, 'webapp/final/home.html')
 
-
-def homeb(request):
-	return render(request, 'webapp/final/homeb.html')
+def home_final(request):
+	return render(request, 'webapp/final/home_final.html')
 
 
 def weather(request):
