@@ -7,5 +7,9 @@ thesis/webapp/static/admin/*
 thesis/webapp/static/chartit/*
 gm/*
 _MACOSX/*
-thesis/thesis/__pycache__/*
+thesis/thesis/__pycache__/__init__.cpython-34.pyc
+thesis/thesis/__pycache__/settings.cpython-34.pyc
+thesis/thesis/__pycache__/urls.cpython-34.pyc
+thesis/thesis/__pycache__/wsgi.cpython-34.pyc
+thesis/webapp/__pycache__/__init__.cpython-34.pyc
 *.pyc
