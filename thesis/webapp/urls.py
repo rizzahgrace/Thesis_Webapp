@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^register', views.register, name='register'),
     url(r'^index', views.index, name='index'),
     url(r'^csv', views.csv, name='csv'),
+    url(r'^test', views.test_display, name='test'),
     url(r'^weather', views.weather, name='weather'),
     url(r'^power', views.power, name='power'),
     url(r'^dbbar', views.AdvancedGraph.as_view(), name='dbbar'),

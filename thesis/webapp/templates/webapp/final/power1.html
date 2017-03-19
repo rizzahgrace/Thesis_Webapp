@@ -1,3 +1,6 @@
+{% load static %}
+{% load highcharts_tags %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -5,35 +8,41 @@
   <title>Solar Energy 
   </title>
 
-  <!-- CSS-->
-   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-    <script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<!-- local links-->
+<link href={% static 'webapp/css/materialize.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
+<link href={% static 'webapp/css/style.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
+<link href={% static 'webapp/css/style.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
 
-  <link href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css" />
-
-  <!-- Latest compiled and minified CSS -->
+<!-- online links-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-<!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-<!-- Latest compiled and minified JavaScript -->
+<!-- local scripts-->
+<script src={% static 'webapp/images/css/materialize.js' %}></script>
+<script src={% static 'webapp/images/css/init.js' %}></script>
+
+<!-- online scripts--> 
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
-
-  <!-- scripts -->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
-
-  <script src="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-
+<!-- for the power graph--> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script type="text/javascript">
+    (function ($) {
+        $.getJSON("{% url 'webapp:powbar' %}", function(data) {
+        $('#chart_container').highcharts(data);
+        });
+    })(jQuery);
+    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 
@@ -51,7 +60,7 @@
       </ul>
       <ul class="right hide-on-med-and-down">
         <li>
-          <a href="index.html">
+          <a href="home.html">
               <script type="text/javascript">
                 
                 tmonth=new Array("January","February","March","April","May","June","July","August","September","October","November","December");
@@ -99,63 +108,31 @@
 
 <div class="container">
   <div class="center-align">
-    <div class="col-sm-8">
-      <h3 class="left-align"><h3>April 7-8, 2016</h3>
-      <div class="ct-chart center-align"></div>
-      <div id="chartist" class="chartist" data-x-axis="DATE" data-y-axis="POWER (Watts)"></div>
-                <script>
-                  new Chartist.Bar('.ct-chart', {
-                     labels: ['Thursday,April 7, 2016',  'Friday, April 8, 2016'],
-                     series: [[118.04, 197.98],
-                              [1158.46, 182.08]
-                             ]
-
-                  }, {
-                    low: 0,
-                    showArea: true,
-                    width: 700,
-                    height: 400,
-                    chartPadding: {
-                    right: 40
-                    }
-                  }, options, responsiveOptions);
-
-                  var options = {
-                    seriesBarDistance: 10
-                  };
-
-                  var responsiveOptions = [
-                    ['screen and (max-width: 700px)', {
-                      seriesBarDistance: 5,
-                      axisX: {
-                        labelInterpolationFnc: function (value) {
-                          return value[0];
-                        }
-                      }
-                    }]
-                  ];
-
-                  new Chartist.Bar('.ct-chart', data, options, responsiveOptions);
-
-                  /*new Chartist.Line('.ct-chart', {
-                    labels: ['Thursday,April 7, 2016',  'Friday, April 8, 2016'],
-                    series: [
-                      [918.28, 1624.18],
-                      [285.3, 287.03]
-                    ]
-                  }, {
-                    low: 0,
-                    showArea: true,
-                    width: 700,
-                    height: 400,
-                    chartPadding: {
-                    right: 40
-                    }
-                    
-                  });
-*/
-              </script> 
+    <div class="col-sm-3"></div>
+    <div class="col-sm-2  lime lighten-4">
+      <a class="waves-effect waves-light btn-flat">NOW</a>
     </div>
+    <div class="col-sm-2">
+      <a href="link2.5.html" class="waves-effect waves-light btn-flat">DAILY</a>
+    </div>
+    <div class="col-sm-2">
+      <a class="waves-effect waves-light btn-flat">MONTHLY</a>
+    </div>
+    <div class="col-sm-3"></div>
+  </div>
+</div>
+<br>
+<br>
+
+<div class="container">
+  <div class="center-align">
+    <div class="col-sm-8">
+      <h3 class="left-align"><h3>Friday, April 8, 2016</h3>
+      <div class="ct-chart center-align"></div>
+      <div id="chart_container" ></div>   
+    </div>
+
+    
     <div class="col-sm-4">
       <div class="row">
           <br>
@@ -164,7 +141,7 @@
           <br>
           <div class="card blue-grey darken-1">
             <div class="card-content white-text">
-              <span class="card-title">316.04 Watt-hour</span>
+              <span class="card-title">196.04 Watt-hour</span>
               <p></p>
             </div>
             <div class="card-action">
@@ -173,7 +150,7 @@
           </div>
           <div class="card blue-grey darken-1">
             <div class="card-content white-text">
-              <span class="card-title">1340.54 Watt-hour</span>
+              <span class="card-title">157.79 Watt-hour</span>
               <p></p>
             </div>
             <div class="card-action">
@@ -185,6 +162,8 @@
             
     </div>
   </div>
+
+  
 </div>
 
 <div class="container">
@@ -195,12 +174,12 @@
     </div>
     
         <div class="col-sm-3">  
-        <img class="left-align" src="images/redbar.jpg" >
+        <img class="left-align" src={% static 'webapp/images/red.png' %}>
         <h5>PV Generation</h5>
         </div>
     
         <div class="col-sm-3">
-       <img class="left-align" src="images/pinkbar.jpg" >
+       <img class="left-align" src={% static 'webapp/images/pink.png' %}>
         <h5>Load Consumption</h5>
     
         </div>
@@ -209,6 +188,7 @@
         </div>
 </div>
 </div>
+
 <!-- <div class="row center-align">
       <table class="responsive-table">
         <thead>
@@ -298,6 +278,7 @@
       </div>
     </div>
   </footer>
+
 
 </body>
 </html>
