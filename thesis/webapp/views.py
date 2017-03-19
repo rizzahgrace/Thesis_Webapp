@@ -52,11 +52,10 @@ def index(request):
 	return render(request, 'webapp/final/home.html')
 
 def home(request):
-	return render(request, 'webapp/final/home.html')
+	return render(request, 'webapp/final/home2.html')
 
-def home_final(request):
-	return render(request, 'webapp/final/home_final.html')
-
+def edits(request):
+	return render(request, 'webapp/final/home3.html')
 
 def weather(request):
 	return render(request, 'webapp/final/weather.html')
