@@ -18,14 +18,23 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from webapp.serializers import DataSerializer
 
-
-from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView, HighChartsSpeedometerView, HighChartsHeatMapView, HighChartsPolarView, HighChartsStockView)
+from highcharts.views import (HighChartsMultiAxesView, HighChartsStockView)
 # Create your views here.
+
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+class LoggedInMixin(object):
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(LoggedInMixin, self).dispatch(*args, **kwargs)
+
+
 def loading(request):
 	return render(request, 'webapp/loading.html')
 
 def login_user(request):
-	logout(request)
 	username = password = ''
 	if request.POST:
 		username = request.POST['username']
@@ -35,18 +44,21 @@ def login_user(request):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-				return HttpResponseRedirect('/index/')
-	return render_to_response('login.html', context_instance=RequestContext(request))
+				return HttpResponseRedirect('/home/')
+	return render_to_response('home.html', context_instance=RequestContext(request))
 
 
 def index(request):
 	return render(request, 'webapp/final/home.html')
 
+def home(request):
+	return render(request, 'webapp/final/home2.html')
+
 def weather(request):
 	return render(request, 'webapp/final/weather.html')
 
 def power(request):
-	return render(request, 'webapp/power.html')
+	return render(request, 'webapp/final/power1.html')
 
 def csv(request):
 	if request.method == 'POST':
@@ -145,7 +157,7 @@ class AdvancedGraph(HighChartsMultiAxesView):
 		data = super(AdvancedGraph, self).get_data()
 		return data
 
-class PowerGraph(HighChartsMultiAxesView):
+class PowerGraph(LoggedInMixin, HighChartsMultiAxesView):
 	title = 'Power'
 	subtitle = ''
 	chart_type = ''
@@ -158,7 +170,8 @@ class PowerGraph(HighChartsMultiAxesView):
 		'y': 30
 	}
 
-	def get_data(self):
+	@login_required
+	def get_data(request, self):
 		owner = Owner.objects.get(AMPS_user = self.request.user)
 		data = {'id': [], 'load': [], 'SP_volt':[], 'timestamp':[]}
 		f = RawData_AMPS.objects.filter(owner = owner)

@@ -136,4 +136,4 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = BASE_DIR + '/webapp/static'
 
-LOGIN_REDIRECT_URL = '/webapp/index'
+LOGIN_REDIRECT_URL = 'django.contrib.auth.views.login'

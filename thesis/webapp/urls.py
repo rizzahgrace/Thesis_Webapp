@@ -10,9 +10,9 @@ app_name = 'webapp'
 
 urlpatterns = [
     url(r'^$', views.loading, name='loading'),
-    url(r'^login/$', auth_views.login, {'template_name': 'webapp/login.html'}, name='login'),
     url(r'^register', views.register, name='register'),
-    url(r'^index', views.index, name='index'),
+    url(r'^index', auth_views.login, {'template_name': 'webapp/final/home.html'}, name='login'),
+    url(r'^home', views.home, name='home'),
     url(r'^csv', views.csv, name='csv'),
     url(r'^test', views.test_display, name='test'),
     url(r'^weather', views.weather, name='weather'),
