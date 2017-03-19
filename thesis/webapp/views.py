@@ -52,9 +52,9 @@ def index(request):
 	return render(request, 'webapp/final/home.html')
 
 def home(request):
-	return render(request, 'webapp/final/home2.html')
+	return render(request, 'webapp/final/home3.html')
 
-def home3(request):
+def home_final(request):
 	return render(request, 'webapp/final/home3.html')
 
 
