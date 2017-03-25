@@ -35,16 +35,14 @@ def loading(request):
 	return render(request, 'webapp/loading.html')
 
 def login_user(request):
-	username = password = ''
-	if request.POST:
-		username = request.POST['username']
-		password = request.POST['password']
-
-		user = authenticate(username=username, password=password)
-		if user is not None:
-			if user.is_active:
-				login(request, user)
-				return HttpResponseRedirect('/home/')
+	username = request.POST['username']
+	password = request.POST['password']
+	user = authenticate(username=username, password=password)
+	if user is not None and user.is_active:
+		auth.login(request, user)
+		return HttpResponseRedirect('/home/')
+	else:
+		return HttpResponseRedirect('/index/')
 	return render_to_response('home.html', context_instance=RequestContext(request))
 
 
@@ -100,8 +98,8 @@ def register(request):
 	return render(request, 'webapp/final/register.html', {'userdata_form': userdata_form, 'user_form' : user_form})
 
 def test_display(request):
-	processed_data = RawData_AMPS.objects.filter(AMPS_user=self.request.user).aggregate(Avg('load'))
-	return render(request, 'webapp/test.html', processed_data)
+	# processed_data = RawData_AMPS.objects.filter(AMPS_user=self.request.user).aggregate(Avg('load'))
+	return render(request, 'webapp/index.html')#, processed_data)
 
 class AdvancedGraph(HighChartsMultiAxesView):
 	title = 'Example Data Chart'
@@ -159,8 +157,8 @@ class AdvancedGraph(HighChartsMultiAxesView):
 		self.series = self.serie
 		data = super(AdvancedGraph, self).get_data()
 		return data
-
-class PowerGraph(LoggedInMixin, HighChartsMultiAxesView):
+		
+class PowerGraph(HighChartsMultiAxesView):
 	title = 'Power'
 	subtitle = ''
 	chart_type = ''
@@ -217,4 +215,4 @@ class PowerGraph(LoggedInMixin, HighChartsMultiAxesView):
 		##### SERIES WITH VALUES
 		self.series = self.serie
 		data = super(PowerGraph, self).get_data()
-		return data
+		return dat
