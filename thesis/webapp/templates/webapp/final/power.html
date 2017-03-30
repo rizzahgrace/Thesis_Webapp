@@ -24,6 +24,7 @@
 <link rel="stylesheet" href={% static 'webapp/css/font-awesome.min.css' %}>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <link href={% static 'webapp/css/animate.css' %} type="text/css" rel="stylesheet" media="screen,projection"/>
+<script src="https://use.fontawesome.com/af9dfbaac1.js"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
@@ -328,18 +329,30 @@
     <br>
     <br>
     <h4>
-    The Weather Station - Faura Hall </h4>
+    Power Monitoring and Prediction </h4>
 <br>
-The Weather Station is a something something located in Faura Hall, Ateneo de manila University.
+The Power Monitoring and Prediction System is a something something located in Faura Hall, Ateneo de manila University.
 It can measure rainfall, humidity, wind speed, wind direction, and solar irradiance.
     </center>
     </div>
     <div class = "col s6">
     <center>
-    <img src = {% static 'webapp/images/temp.png' %} class = "responsive-img animated zoomIn">
+    <img src = "temp.png" class = "responsive-img animated zoomIn">
     </center>
     </div>
-      <ul id="tabs-swipe-demo" class="tabs">
+      
+    <!--   <div class = "col s12"><br></div>
+      <font face = "PT Sans">
+      <center>
+        <H3>
+          Weather Station - Faura Hall
+        </H3>
+      </center>
+      </font>
+      </div> -->
+
+
+  <ul id="tabs-swipe-demo" class="tabs">
     <li class="tab col s3"><a href="#test-swipe-1">Daily</a></li>
     <li class="tab col s3"><a class="active" href="#test-swipe-2">Weekly</a></li>
     <li class="tab col s3"><a href="#test-swipe-3">Monthly </a></li>
@@ -347,12 +360,11 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
   <div id="test-swipe-1" class="col s12 white"> <div id="chartdiv2" style="width: 100%; height: 400px;" ></div> </div>
   <div id="test-swipe-2" class="col s12 white"> <div id="chartdiv3" style="width: 100%; height: 400px;" ></div> </div>
   <div id="test-swipe-3" class="col s12 white"> <div id="chartdiv" style="width: 100%; height: 400px;" ></div> </div>
-
-
-        <div class = "col s12">
+        
+      <div class = "col s12">
       <br>
       </div>
-      <div class =" col s12 m3 l3">
+      <div class =" col s12 m4 l4">
       <div class ="card white animated slideInUp">
         <div class = "card-content black-text">
         <center>
@@ -361,17 +373,16 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
       </i>
       <font face = "Open Sans" size="10">
         
-        190 
+        12.19 kWh
         </font>
+     
       <br>
-      Watt Hour
-      <br>
-       PV Power Generation
+     <b>  PV Power Generation </b>
       </center>
         </div>
         </div>
       </div>
-      <div class = "col s12 m3 l3">
+      <div class = "col s12 m4 l4">
       <div class ="card white animated slideInUp">
         <div class = "card-content black-text">
         <center>
@@ -380,52 +391,38 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
       </i>
       <font face = "Open Sans" size="10">
         
-        150 
+        43.44 kWh
         
         </font>
+      
       <br>
-      Watt Hour
-      <br>
- Power Consumption
+ <b>Power Consumption</b>
       </center>
         </div>
         </div>
       </div>
-      <div class = "col s12 m3 l3">
-      <div class ="card white animated slideInUp">
-        <div class = "card-content black-text">
-        <center>
-      <!-- <i class="fa fa-arrow-left fa-spin icon-lbd4 fa-5x"> -->
-        
-      </i>
-      <font face = "Open Sans" size="10">
-        40
-        </font>
-      <br>
+      
 
-      Watt Hour
-      <br>
-Difference      </center>
-        </div>
+      <div class = "col s12 m4 l4">
+      <div class ="card white animated slideInUp">
+      
+    <div class="card horizontal">
+      <div class="card-image">
+        <img src="http://i.imgur.com/eKVqIjo.png?1">
+      </div>
+      <div class="card-stacked">
+        <b> &nbsp; AMPS Power Bill Prediction Tool</b>
+      
+        
+       &nbsp; Know your projected monthly<br>&nbsp; power bill generation now!
+        <div class="card-action">
+          <a href="#">Generate my bill</a>
         </div>
       </div>
+    </div>
 
-      <div class = "col s12 m3 l3">
-      <div class ="card white animated slideInUp">
-        <div class = "card-content black-text">
-        <center>
-      <!-- <i class="fa fa-shower icon-lbd4 fa-5x"> -->
         
-      </i>
-      <font face = "Open Sans" size="12">
-        Generate
-        </font>
-      <br>
-       Predicted <br>Power Bill
-      </center>
-        </div>
-        </div>
-      </div>         
+         
           </div>
         </div>
       </div>
