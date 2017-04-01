@@ -8,7 +8,7 @@ from webapp import views
 
 app_name = 'webapp'
 
-urlpatterns = [
+urlpatterns = format_suffix_patterns([
     url(r'^$', views.loading, name='loading'),
     url(r'^register', views.register, name='register'),
     url(r'^login', views.login_user, name='login'),
@@ -22,7 +22,10 @@ urlpatterns = [
     url(r'^power', views.power, name='power'),
     url(r'^dbbar', views.AdvancedGraph.as_view(), name='dbbar'),
     url(r'^powbar', views.PowerGraph.as_view(), name='powbar'),
-]
+    url(r'^display', views.api_root),
+    url(r'^AMPSdata/$', views.AMPSdataView.as_view(), name='AMPSdata-list'),
+    url(r'^owner/$', views.UserList.as_view(), name='Owner-list'),
+])
 	
 urlpatterns += [
     url(r'^api-auth/', include('rest_framework.urls',

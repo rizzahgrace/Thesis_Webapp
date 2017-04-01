@@ -16,20 +16,23 @@ from chartit import DataPool, Chart
 
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
-from webapp.serializers import DataSerializer
+from webapp.serializers import DataSerializer, OwnerSerializer
 
 from highcharts.views import (HighChartsMultiAxesView, HighChartsStockView)
 # Create your views here.
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from webapp.permissions import IsAuthenticated
 
-class LoggedInMixin(object):
+from rest_framework import generics, permissions, viewsets
 
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(LoggedInMixin, self).dispatch(*args, **kwargs)
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.reverse import reverse
+from rest_framework import renderers
 
 def loading(request):
 	return render(request, 'webapp/loading.html')
@@ -44,7 +47,6 @@ def login_user(request):
 	else:
 		return HttpResponseRedirect('/index/')
 	return render_to_response('home.html', context_instance=RequestContext(request))
-
 
 def index(request):
 	return render(request, 'webapp/final/home.html')
@@ -102,7 +104,7 @@ def test_display(request):
 	return render(request, 'webapp/index.html')#, processed_data)
 
 class AdvancedGraph(HighChartsMultiAxesView):
-	title = 'Example Data Chart'
+	title = 'Weather Data'
 	subtitle = ''
 	chart_type = ''
 	chart = {'zoomType': 'xy'}
@@ -125,7 +127,7 @@ class AdvancedGraph(HighChartsMultiAxesView):
 
 
 		self.categories = data['timestamp']
-		 	
+			
 		self.yaxis = {
 			'title': {
 				'text': 'Title 1'
@@ -171,17 +173,14 @@ class PowerGraph(HighChartsMultiAxesView):
 		'y': 30
 	}
 
-	@login_required
-	def get_data(request, self):
-		owner = Owner.objects.get(AMPS_user = self.request.user)
-		data = {'id': [], 'load': [], 'SP_volt':[], 'timestamp':[]}
-		f = RawData_AMPS.objects.filter(owner = owner)
-		# f = RawData_AMPS.objects.all()
+	def get_data(self):
+		data = {'id': [], 'load': [], 'SP_pow':[], 'timestamp':[]}
+		f = RawData_AMPS.objects.all()[:10]
 		for unit in f:
 			data['id'].append(unit.id)
 			data['timestamp'].append(unit.timestamp.strftime('%I:%M'))
 			data['load'].append(unit.load)
-			data['SP_volt'].append(unit.SP_volt)
+			data['SP_pow'].append(unit.SP_pow)
 
 
 		self.categories = data['timestamp']
@@ -204,8 +203,8 @@ class PowerGraph(HighChartsMultiAxesView):
 			'data': data['load']
 			},
 			{
-			'name': 'Voltage',
-			'data': data['SP_volt']
+			'name': 'Power Generated',
+			'data': data['SP_pow']
 			} 
 		]
 
@@ -215,4 +214,46 @@ class PowerGraph(HighChartsMultiAxesView):
 		##### SERIES WITH VALUES
 		self.series = self.serie
 		data = super(PowerGraph, self).get_data()
-		return dat
+		return data
+
+@api_view(['GET'])
+def api_root(request, format=None):
+	return Response({
+		'owners': reverse('webapp:Owner-list', request=request, format=format),
+		'AMPSdata': reverse('webapp:AMPSdata-list', request=request, format=format),	
+		'mainmenu' : reverse('webapp:index', request=request, format=format)
+	})
+
+
+class AMPSdataView(APIView):
+	permission_classes=(permissions.IsAuthenticated,)
+	def get(self, request, format=None):
+		if request.user.is_superuser:
+			AMPSdata=RawData_AMPS.objects.all()
+			serializer = DataSerializer(AMPSdata, many=True)
+			return Response(serializer.data)
+		else:
+			user=self.request.user
+			owner=user
+			AMPSdata=RawData_AMPS.objects.filter(owner__AMPS_user=owner)
+			serializer = DataSerializer(AMPSdata, many=True)
+			return Response(serializer.data)
+
+
+class OwnerView(APIView):
+	permission_classes=(permissions.IsAuthenticated,)
+	def get(self, request, format=None):
+		if request.user.is_superuser:
+			owners=Owner.objects.all()
+			serializer = OwnerSerializer(owners, many=True)
+			return Response(serializer.data)
+		else:	
+			user=self.request.user
+			owner=user
+			owners=Owner.objects.filter(AMPS_user=owner)
+			serializer = OwnerSerializer(owners, many=True)
+			return Response(serializer.data)
+
+class UserList(generics.ListAPIView):
+	queryset = Owner.objects.all()
+	serializer_class = OwnerSerializer
