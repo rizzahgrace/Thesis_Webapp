@@ -257,6 +257,119 @@
         }
       );
     </script>
+
+     <script type="text/javascript">
+      AmCharts.makeChart("chartdiv4",
+              {
+          "type": "serial",
+          "categoryField": "date",
+          "dataDateFormat": "YYYY-MM-DD",
+          "angle": 13,
+          "depth3D": 11,
+          "plotAreaFillColors": "#FF8000",
+          "theme": "light",
+          "categoryAxis": {
+            "parseDates": true
+          },
+          "chartCursor": {
+            "enabled": true
+          },
+          "chartScrollbar": {
+            "enabled": true
+          },
+          "trendLines": [],
+          "graphs": [
+            {
+              "bullet": "round",
+              "cornerRadiusTop": 2,
+              "fillAlphas": 0.49,
+              "id": "AmGraph-1",
+              "tabIndex": 4,
+              "title": "graph 1",
+              "valueField": "column-1"
+            },
+            {
+              "bullet": "square",
+              "fillAlphas": 0.27,
+              "id": "AmGraph-2",
+              "title": "graph 2",
+              "valueField": "column-2"
+            }
+          ],
+          "guides": [],
+          "valueAxes": [
+            {
+              "id": "ValueAxis-1",
+              "title": "Axis title"
+            }
+          ],
+          "allLabels": [],
+          "balloon": {},
+          "legend": {
+            "enabled": true,
+            "useGraphSettings": true
+          },
+          "titles": [
+            {
+              "id": "Title-1",
+              "size": 15,
+              "text": "Chart Title"
+            }
+          ],
+          "dataProvider": [
+            {
+              "date": "2014-03-01",
+              "column-1": 8,
+              "column-2": 5
+            },
+            {
+              "date": "2014-03-02",
+              "column-1": 6,
+              "column-2": 7
+            },
+            {
+              "date": "2014-03-03",
+              "column-1": 2,
+              "column-2": 3
+            },
+            {
+              "date": "2014-03-04",
+              "column-1": 1,
+              "column-2": 3
+            },
+            {
+              "date": "2014-03-05",
+              "column-1": 2,
+              "column-2": 1
+            },
+            {
+              "date": "2014-03-06",
+              "column-1": 3,
+              "column-2": 2
+            },
+            {
+              "date": "2014-03-07",
+              "column-1": 6,
+              "column-2": 8
+            }
+          ]
+        }
+      );
+    </script>
+    <script type="text/javascript">
+function unhide(clickedButton, divID) {
+var item = document.getElementById(divID);
+if (item) {
+    if(item.className=='hidden'){
+        item.className = 'unhidden' ;
+        clickedButton.value = 'hide'
+    }else{
+        item.className = 'hidden';
+        clickedButton.value = 'unhide'
+    }
+}}
+
+</script>
 </head>
 <body bgcolor = "#eeeeee">
 
@@ -364,7 +477,7 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
       <div class = "col s12">
       <br>
       </div>
-      <div class =" col s12 m4 l4">
+      <div class =" col s12 m3 l3">
       <div class ="card white animated slideInUp">
         <div class = "card-content black-text">
         <center>
@@ -373,16 +486,16 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
       </i>
       <font face = "Open Sans" size="10">
         
-        12.19 kWh
+        12.19 
         </font>
      
       <br>
-     <b>  PV Power Generation </b>
+     <b>  PV Power Generation (W)</b>
       </center>
         </div>
         </div>
       </div>
-      <div class = "col s12 m4 l4">
+     <div class = "col s12 m3 l3">
       <div class ="card white animated slideInUp">
         <div class = "card-content black-text">
         <center>
@@ -391,20 +504,22 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
       </i>
       <font face = "Open Sans" size="10">
         
-        43.44 kWh
+        43.44
         
         </font>
       
       <br>
- <b>Power Consumption</b>
+ <b> 
+<!-- <button onclick = "myFunction()"> Power Prediction (W)</button> -->
+<button onclick="unhide(this, 'about') " value="unhide"> Power Prediction (W)</button>
+ <!-- <a href = "#">Power Prediction (W)</b> -->
       </center>
         </div>
         </div>
       </div>
-      
 
-      <div class = "col s12 m4 l4">
-      <div class ="card white animated slideInUp">
+      <div class = "col s12 m3 l3">
+      <div class ="card white ">
       
     <div class="card horizontal">
       <div class="card-image">
@@ -412,18 +527,15 @@ It can measure rainfall, humidity, wind speed, wind direction, and solar irradia
       </div>
       <div class="card-stacked">
         <b> &nbsp; AMPS Power Bill Prediction Tool</b>
-      
+      <!-- 
         
-       &nbsp; Know your projected monthly<br>&nbsp; power bill generation now!
+       &nbsp; Know your projected monthly<br>&nbsp; power bill generation now! -->
         <div class="card-action">
-          <a href="#">Generate my bill</a>
+         <!--  <a href="#">Generate my bill</a> -->
+         <button onclick="unhide(this, 'about') " value="unhide"> Generate my power bill!</button>
         </div>
       </div>
-    </div>
-
-        
-         
-          </div>
+    </div>          </div>
         </div>
       </div>
 
